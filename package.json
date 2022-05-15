@@ -1,0 +1,17 @@
+{
+    "scripts": {
+        "docs:dev": "vitepress dev docs --port 3015",
+        "docs:build": "vitepress build docs",
+        "docs:serve": "vitepress serve docs",
+        "docs:clean": "rimraf docs/.vitepress/dist  docs/.vitepress/temp"
+    },
+    "devDependencies": {
+        "cross-env": "7.0.3",
+        "vitepress": "0.22.3",
+        "vitepress-theme-demoblock": "1.4.2",
+        "sass": "1.50.0",
+        "less": "4.1.2",
+        "prettier": "2.2.1",
+        "rimraf": "3.0.2"
+    }
+}
