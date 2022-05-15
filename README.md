@@ -1,3 +1,11 @@
+# vue3-admin-ts
+
+> > the doc of vue3-admin-plus using vitePress 
+
+[Doc of Englist](https://github.jzfai.top/vue3-admin-doc/)
+
+[中文官网](https://github.jzfai.top/vue3-admin-doc/zh/)
+
 ## Build Setup
 
 ```bash
