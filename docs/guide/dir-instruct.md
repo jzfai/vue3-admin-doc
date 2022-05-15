@@ -68,7 +68,7 @@ lang: en-US
 
 此目录主要用作全局通用组件的封装(如：Tinymce)。如果是某个业务场景用到的多次组件，建议就地封装如：layout中的components
 
-![1638177748692](http://8.135.1.141/file/vap-assets/1638177748692.png)
+![1638177748692](https://github.jzfai.top/file/vap-assets/1638177748692.png)
 
 总之不要啥组件都往这个目录进行封装，最后组件太多，不好查找，不好维护
 
@@ -80,7 +80,7 @@ vue3中的新特性hook，用于封装业务逻辑，和一般的utils相比，�
 
 svg图片目录使用的是**vite-plugin-svg-icons**插件把多个svg图片封装起来
 
-![1638253985928](http://8.135.1.141/file/vap-assets/1638253985928.png)
+![1638253985928](https://github.jzfai.top/file/vap-assets/1638253985928.png)
 
 默认读取的是common和nav-bar目录里的图片，可以在vite.config.js的viteSvgIcons进行配置
 
@@ -118,7 +118,7 @@ icon-class为svg的文件名
 
 混合文件，经常使用到的state或者method可以进行混合
 
-![1638254609337](http://8.135.1.141/file/vap-assets/1638254609337.png)
+![1638254609337](https://github.jzfai.top/file/vap-assets/1638254609337.png)
 
 commonMixin.js
 用户获取基本的信息，如环境变量，时间日期点（今天，近三天），延迟执行方法sleepMixin等
@@ -176,7 +176,7 @@ onMounted(() => {
 
 
 一次配置就可以生成你想要的路由和页面，这里主要介绍下路由的配置和使用
-![1636428866625](http://8.135.1.141/file/vap-assets/1638258303400.png)
+![1636428866625](https://github.jzfai.top/file/vap-assets/1638258303400.png)
 
 完整里的路由配置参数(这边以项目中的keep-alive路由配置为例)
 
@@ -273,7 +273,7 @@ export default createStore({
 
 提供了一些常用的css布局，如flex布局，margin，padding等，可以提高我们的开发效率
 
-![1636428866625.png](http://8.135.1.141/file/vap-assets/1638260699909.png)
+![1636428866625.png](https://github.jzfai.top/file/vap-assets/1638260699909.png)
 
 index.scss：主导入文件
 reset-style.scss：重置样式
@@ -364,7 +364,7 @@ variables-to-js.scss : 将css导出到js使用文件（后续会说）
 
 通用工具类
 
-![1638263373914](http://8.135.1.141/file/vap-assets/1638263373914.png)
+![1638263373914](https://github.jzfai.top/file/vap-assets/1638263373914.png)
 
 auth.js ：操作token的api。移除了以前的js-cookie（electron中js-cookie会出现问题），采用了localStorage
 
@@ -384,7 +384,7 @@ validate.js: 通用的一些校验
 #定义的变量必须以VITE_APP_开头 通过import.meta.env获取
 #如获取VITE_APP_BASE_URL，import.meta.env.VITE_APP_BASE_URL
 VITE_APP_ENV = 'serve'
-VITE_APP_BASE_URL = 'http://8.135.1.141/micro-service-api'
+VITE_APP_BASE_URL = 'https://github.jzfai.top/micro-service-api'
 VITE_APP_BASE_WS_URL = ''
 
 //package.json

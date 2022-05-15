@@ -88,9 +88,9 @@ export default ({ command, mode }) => {
   return {
     /**
     配置基础路径
-    如访问地址为http://8.135.1.141/vue3-admin-plus/
+    如访问地址为https://github.jzfai.top/vue3-admin-plus/
     那么此路径需要配置为/vue3-admin-plus/
-    如果此路径配置为/， 则只能访问到http://8.135.1.141/， 则会报404错误
+    如果此路径配置为/， 则只能访问到https://github.jzfai.top/， 则会报404错误
     **/
     base: setting.viteBasePath,
     //定义全局变量

@@ -1,4 +1,3 @@
-
 ---
 lang: zh-CN
 ---
@@ -17,7 +16,7 @@ lang: zh-CN
 
 我们先看看架构中的配置文件
 
-![1639552052606](http://8.135.1.141/file/vap-assets/1639552052606.png)
+![1639552052606](https://github.jzfai.top/file/vap-assets/1639552052606.png)
 
 打包相关
 
@@ -43,16 +42,16 @@ lang: zh-CN
 #用于区分环境的变量，如果是开发则配置为test
 VITE_APP_ENV = 'dev'
 #axios中baseUrl的地址
-VITE_APP_BASE_URL = 'http://8.135.1.141/micro-service-api'
+VITE_APP_BASE_URL = 'https://github.jzfai.top/micro-service-api'
 
 #图片和oss配置
-VITE_APP_IMAGE_URL = 'http://8.135.1.141:8080'
+VITE_APP_IMAGE_URL = 'https://github.jzfai.top:8080'
 
 #跨域相关配置
 #VITE_APP_BASE_URL = '/api'
 
 #vite.config.js里proxy配置的变量
-#VITE_APP_PROXY_URL = 'http://8.135.1.141/micro-service-api'
+#VITE_APP_PROXY_URL = 'https://github.jzfai.top/micro-service-api'
 ```
 
 >注：定义变量必须要以VITE_APP_开头，不然vite不会进行变量收集，配置的变量将无法读取

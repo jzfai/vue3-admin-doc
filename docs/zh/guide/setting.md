@@ -16,7 +16,7 @@ settings.js 主要分为三部分配置
 
 我们先熟悉 vue3-element-plus 页面布局，来张图
 
-![1639477384677](http://8.135.1.141/file/vap-assets/1639477384677.png)
+![1639477384677](https://github.jzfai.top/file/vap-assets/1639477384677.png)
 
 下面详解，配合上面的图
 
@@ -88,9 +88,9 @@ const setting = {
 
    /*
    * vite.config.js base config
-   * such as http://8.135.1.141/vue3-admin-plus/#/dashboard
+   * such as https://github.jzfai.top/vue3-admin-plus/#/dashboard
    * 那么你需要配置："/vue3-admin-plus/"
-   *  如果你只配置"/",那么页面只能访问到根路径http://8.135.1.141/
+   *  如果你只配置"/",那么页面只能访问到根路径https://github.jzfai.top/
    * */
   viteBasePath: '/vue3-admin-plus/'
 }
@@ -98,7 +98,7 @@ const setting = {
 export default setting
 ```
 
-在页面路径[page-switch](http://8.135.1.141/vue3-admin-plus/#/page-switch/log)配置了测试 demo
+在页面路径[page-switch](https://github.jzfai.top/vue3-admin-plus/#/page-switch/log)配置了测试 demo
 
 在页面加载之处，将 settings.js 配置信息加载到
 

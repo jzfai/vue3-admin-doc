@@ -6,7 +6,7 @@ lang: en-US
 
 当我们在某些特定场景中需要缓存某个页面，此时就需要用到我们所需要讲的 keep-alive，本篇主要讲解架构中 keep-alive 的原理和使用
 
-[keep-alive 体验地址](http://8.135.1.141/vue3-admin-template/#/writing-demo/keep-alive)
+[keep-alive 体验地址](https://github.jzfai.top/vue3-admin-template/#/writing-demo/keep-alive)
 
 #### 架构 keep-alive 核心源码分析
 
@@ -117,19 +117,19 @@ cachePage: true, leaveRmCachePage: false  -> 页面进入时缓存，离开时�
 
 有时我们会有这种业务场景
 
-![1644546522483](http://8.135.1.141/file/vap-assets/1644546522483.png)
+![1644546522483](https://github.jzfai.top/file/vap-assets/1644546522483.png)
 
 从 A 页面跳到 B 页面在到 C 页面，此时需要 A,B,C 页面都需要缓存。保存 A,B,C 页面的状态，如 A 页面的列表搜索条件等。但是如果跳出 A,B,C 页面时需要同时清空 A,B,C 页面的缓存，如：
 
-![1644546982434](http://8.135.1.141/file/vap-assets/1644546982434.png)
+![1644546982434](https://github.jzfai.top/file/vap-assets/1644546982434.png)
 
 #### 实现原理
 
-![1644546489961](http://8.135.1.141/file/vap-assets/1644546489961.png)
+![1644546489961](https://github.jzfai.top/file/vap-assets/1644546489961.png)
 
 ##### 核心代码
 
-![1647255806164](http://8.135.1.141/file/vap-assets/1647255806164.png)
+![1647255806164](https://github.jzfai.top/file/vap-assets/1647255806164.png)
 
 src/views/example/keep-alive/KeepAlive.vue
 
@@ -164,7 +164,7 @@ const unWatch = watch(
 
 #### 多级路由如何进行页面缓存呢
 
-[多级路由页面缓存体验地址](http://8.135.1.141/vue3-admin-template/#writing-demo/deep-router-keep-alive/deep-children)
+[多级路由页面缓存体验地址](https://github.jzfai.top/vue3-admin-template/#writing-demo/deep-router-keep-alive/deep-children)
 
 核心源码分析
 
@@ -288,7 +288,7 @@ router/index.js
 
 2.和路由配置有关联，更利于我们对缓存的使用。如，我们可以根据路由配置的**cachePage**或者**leaveRmCachePage**，实现进行页面是否缓存，和离开页面页面是否移除缓存的**组合式选择**。
 
-![1644548683277](http://8.135.1.141/file/vap-assets/1644548683277.png)
+![1644548683277](https://github.jzfai.top/file/vap-assets/1644548683277.png)
 
 ##### 那么如果我想实现之前 tab 打开时，页面缓存，tab 关闭时，移除缓存的功能呢？
 

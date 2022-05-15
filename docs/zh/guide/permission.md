@@ -7,7 +7,7 @@ lang: zh-CN
 
 来先贴上 vue3-admin-plus 登录流程图
 
-![1638344733744](http://8.135.1.141/file/vap-assets/1638344733744.png)
+![1638344733744](https://github.jzfai.top/file/vap-assets/1638344733744.png)
 
 下面我们来详细说说
 

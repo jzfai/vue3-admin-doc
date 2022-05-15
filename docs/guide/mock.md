@@ -24,7 +24,7 @@ yarn add vite-plugin-mock mockjs
 
 创建 mock 文件夹
 
-![1638338361869](http://8.135.1.141/file/vap-assets/1638338361869.png)
+![1638338361869](https://github.jzfai.top/file/vap-assets/1638338361869.png)
 
 配置 vite.config.js
 
@@ -73,7 +73,7 @@ export function setupProdMockServer() {
 我们先看下 mock 和 views 目录结构图
 定义的 mock 文件名称建议和 views 中的目录文件夹相同，有对应关系，方便后期查找。
 
-![1638338077377](http://8.135.1.141/file/vap-assets/1638338077377.png)
+![1638338077377](https://github.jzfai.top/file/vap-assets/1638338077377.png)
 
 在 mock 文件夹下创建.js 文件，如 example.js
 

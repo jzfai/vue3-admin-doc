@@ -6,7 +6,7 @@ lang: zh-CN
 
 项目 github 地址：[vue3-element-plus](https://github.com/jzfai/vue3-admin-plus.git)
 
-体验地址：http://8.135.1.141/vue3-admin-plus
+体验地址：https://github.jzfai.top/vue3-admin-plus
 
 系列文章入口：
 
@@ -29,7 +29,7 @@ proxy 跨域配置
 
 ##### node proxy 跨域原理图
 
-![1636428866625.png](http://8.135.1.141/file/vap-assets/1636428866625.png)
+![1636428866625.png](https://github.jzfai.top/file/vap-assets/1636428866625.png)
 
 ###### vite.config.js 中
 
@@ -51,7 +51,7 @@ proxy: {
 
 ```
 请求拦截的前缀如请求地址中 http://localhost:5001/api
-注意：请求域名必须为http://localhost:5001/才会进行拦截(你本地访问页面的起始地址)，  如http://8.135.1.141/api则不会进行拦截，所以需要配置跨域的话建议把url写成：/api就行
+注意：请求域名必须为http://localhost:5001/才会进行拦截(你本地访问页面的起始地址)，  如https://github.jzfai.top/api则不会进行拦截，所以需要配置跨域的话建议把url写成：/api就行
 如在 .env.serve-dev文件中设置VITE_APP_BASE_URL = '/api'
 ```
 
@@ -125,7 +125,7 @@ public class TestController {
             }
             #网关（请求跨域配置）
             location ^~/micro-service-api/ {
-                    proxy_pass http://8.135.1.141:10156/;
+                    proxy_pass https://github.jzfai.top:10156/;
                     #允许的请求头
                     add_header 'Access-Control-Allow-Methods' 'GET,OPTIONS,POST,PUT,DELETE' always;
                     add_header 'Access-Control-Allow-Credentials' 'true' always;
