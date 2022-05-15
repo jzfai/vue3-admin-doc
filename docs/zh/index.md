@@ -1,4 +1,5 @@
 ---
+lang: zh-CN
 home: true
 heroImage: /logo.svg
 actionText: Get Started

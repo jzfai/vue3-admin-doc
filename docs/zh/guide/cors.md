@@ -1,3 +1,7 @@
+---
+lang: zh-CN
+---
+
 #### 前言：跨域配置可以分为：前端配置，后端配置，nginx 配置， 这里分别介绍
 
 项目 github 地址：[vue3-element-plus](https://github.com/jzfai/vue3-admin-plus.git)
