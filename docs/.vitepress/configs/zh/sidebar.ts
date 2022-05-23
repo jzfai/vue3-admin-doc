@@ -1,10 +1,18 @@
 export default [
   {
-    text: '相关视频和文档整合',
+    text: '快速开始',
     children: [
       {
-        text: '带你用vue3+vite2撸后台',
+        text: '起步',
+        link: '/zh/guide/'
+      },
+      {
+        text: '相关视频和更新日志',
         link: '/zh/guide/video-doc'
+      },
+      {
+        text: 'vscode和webstrom如何配置',
+        link: '/zh/guide/vscode-webstrom-setting'
       }
     ]
   },
@@ -22,6 +30,14 @@ export default [
       {
         text: '配置篇(settings.js)',
         link: '/zh/guide/setting'
+      },
+      {
+        text: 'axios使用及请求取消',
+        link: '/zh/guide/axios-req'
+      },
+      {
+        text: '全局错误日志收集 ',
+        link: '/zh/guide/error-collection'
       },
       {
         text: 'mock篇',

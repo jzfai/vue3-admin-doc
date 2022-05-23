@@ -2,72 +2,133 @@
 lang: en-US
 ---
 
-## B 站相关视频（让你快速入门和开发）
+# vue3-admin-plus
 
-[vscode 和 webstrom 如何配置让我们开发的更爽](https://www.bilibili.com/video/BV1TT4y197g1/)
+> vue3 admin plus provides enterprise-level development demo
 
-[vue3-admin-template 架构基本介绍](https://www.bilibili.com/video/BV1F5411Z7Ag/)
+A new  generation admin  construct   using  vue3(setup-script)+vite2+element-plus ，It's fast!
 
-[vue3 快速入门及和 vue2 在写法的区别](https://www.bilibili.com/video/BV1WS4y1r74W/)
+Use eslint+prettier+gitHooks format and verification code to improve code standardization and development efficiency
 
-[vue3 快速入门及和 vue2 在写法的区别](https://www.bilibili.com/video/BV1WS4y1r74W/)
+Vite need Node.js >= 12.0.0。
 
-[axios 使用及请求取消](https://www.bilibili.com/video/BV1oT4y1m7kE/)
 
-[登录和路由权限篇(提升篇) 01](https://www.bilibili.com/video/BV1pZ4y1z7Uv/)
+## Online experience
 
-[登录和路由权限篇(提升篇) 02](https://www.bilibili.com/video/BV1M34y187DH/)
+[github address](https://github.com/jzfai/vue3-admin-plus.git)
 
-[keep-alive 生命周期,二三级自动缓存原理,企业常见案例讲解](https://www.bilibili.com/video/BV1244y1K7oK/)
+[Access address](http://8.135.1.141/vue3-admin-plus)
 
-## 相关项目
+国内体验地址：http://8.135.1.141/vue3-admin-plus
 
-框架有 js，ts，plus 和 electron 版本
+github 地址：  https://github.com/jzfai/vue3-admin-plus.git
 
-- js 版本：[vue3-element-admin](https://github.com/jzfai/vue3-admin-template.git)
-- ts 版本：[vue3-element-ts](https://github.com/jzfai/vue3-admin-ts.git)
-- js 实例参考 plus 版本：[vue3-element-plus](https://github.com/jzfai/vue3-admin-plus.git)
-- electron 版本：[vue3-element-electron](https://github.com/jzfai/vue3-admin-electron.git)
-- react 版本： [react-admin-template](https://github.com/jzfai/react-admin-template.git)
-- react 的 ts 版本： [react-admin-ts](https://github.com/jzfai/react-admin-ts.git)
-- java 微服务后台数据：[micro-service-plus](https://github.com/jzfai/micro-service-plus)
+## Demo
 
-> js 和 ts 版本为基础版本，较为简单。plus 版本为加强版本，提供了一些使用的 demo。建议用基础版本学习或者作为基础版本进行开发，如果有用到 plus 版本中的一些功能可以逐个集成。
->
-> 注：vue3 系列的已开发完成， react17 的还在开发中
+---- Let's look at the loading speed and the size of the built package first.：
 
-## update log
+![template-speed-analysis](https://github.jzfai.top/file/images/template-speed-analysis.png)
 
-v1.5.5
+![template-demo](https://github.jzfai.top/file/images/plus-demo.png)
 
-Features
+## Related items
 
-add the vue3+vite2 unit-test func
+The framework is available in js, ts , plus and electron versions
+- js version：[vue3-element-admin](https://github.com/jzfai/vue3-admin-template.git)
+- ts version：[vue3-element-ts](https://github.com/jzfai/vue3-admin-ts.git)
+- js version for plus：[vue3-element-plus](https://github.com/jzfai/vue3-admin-plus.git)
+- js version for electron：[vue3-element-electron](https://github.com/jzfai/vue3-admin-electron.git)
+- react version： [react-admin-template](https://github.com/jzfai/react-admin-template.git)
+- java Micro-service background data：[micro-service-plus](https://github.com/jzfai/micro-service-plus)
+> development and  experience：two words  Really fragrant！！！！！
 
-Bug fixes
 
-- change the "vite-plugin-vue-setup-extend" plugin to "vite-plugin-vue-setup-extend-plus" and then fix the issue of debug
-- remove the key prop of three level keep-alive container in order to fix the multi call the onMounted when the three level keep-alive
-- fix .husky about pre-commit no breaking when the eslint has error
 
-devDependencies of unit-test
+#### Comparison of performance between vue3 and vue2
 
-```shell
- "jest": "<27",
- "ts-jest": "<27",
- "tslib": "^2.4.0",
- "vue-jest": "^5.0.0-alpha.10",
- "@babel/preset-env": "^7.17.10",
- "@types/jest": "<27",
- "@vue/test-utils": "^2.0.0-rc.18",
- "babel-jest": "<27",
- "jest-serializer-vue": "2.0.2",
- "jest-transform-stub": "2.0.0"
+- 41% reduction in package size
+
+- The initial rendering is 55% faster, the update rendering is 133% faster
+
+- Memory reduction 54%
+
+- **Use Proxy instead of defineProperty to implement data responsiveness**
+
+- **Rewrite the implementation of virtual DOM and Tree-Shaking**
+
+
+[Comparison of packaging speed between vite2 and webpack](https://github.com/jzfai/vue3-admin-plus/issues/2)
+
+## Build Setup
+
+```bash
+# clone the project
+git clone https://github.com/jzfai/vue3-admin-plus.git
+
+# enter the project directory
+cd vue3-admin-plus
+
+# pnpm address https://pnpm.io/zh/motivation
+# install dependency(Recommend use pnpm)
+# you can  use "npm -g i pnpm" to install pnpm 
+pnpm i
+
+# develop
+pnpm run dev
 ```
 
-## How to migrate **Element Plus**
+## Build
 
-See how to migrate from **ElementUI** to **Element Plus** in our dedicated discussion:
+```bash
+# build for test environment
+pnpm run build-test
 
-- For English: [#5658](https://github.com/element-plus/element-plus/discussions/5658)
-- 简体中文: [#5657](https://github.com/element-plus/element-plus/discussions/5657)
+# build for production environment
+pnpm run  build
+```
+
+## Others
+
+```bash
+# preview the release environment effect
+pnpm run preview
+
+# code format check
+pnpm run lint
+
+```
+
+## Extra
+
+Architecture development is not easy. If you feel good, please give me a **start**. The architecture is still being improved. Welcome to join me in development and become Contributors together! ! ! !
+
+
+## Browsers support
+
+Note: Vue3 is not supported the Internet Explorer
+
+Modern browsers and Internet Explorer 11+.
+
+## Discussion and Communication
+[WeChat group](https://github.jzfai.top/file/images/wx-groud.png)
+
+## 赞赏(appreciate)
+
+如果可以请我喝杯下午茶(Treat me to afternoon tea if you can)
+
+| WeChart | AliPay |
+| :-: | :-: |
+| <img src="https://github.jzfai.top/file/images/wxpay-code.png" height="220" /> | <img src="https://github.jzfai.top/file/images/alipay-code.png" height="220" /> |
+
+>如果属于特别赞助，需注明信息，必要时可以提供特别帮助
+>
+>如果公司需要技术合作，可以单独联系(进群找群主)
+>
+>If it is a special sponsorship, the information must be indicated, and special assistance can be provided if necessary
+
+## License
+
+[MIT](https://github.com/jzfai/vue3-admin-plus/blob/master/LICENSE) license.
+
+Copyright (c) 2022-present  kuanghua
+

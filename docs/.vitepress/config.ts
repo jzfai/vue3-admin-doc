@@ -44,12 +44,33 @@ export default defineConfig({
         selectText: '中文',
         nextLinks: true,
         nav: [
-          { text: `文档`, link: `/zh/guide/` },
+          { text: `文档`, link: `/zh/guide/start` },
           // { text: `组件`, link: `${prefix}components/button` },
           // { text: `API 参考`, link: `${prefix}api/` },
           {
             text: `更新日志`,
             link: `https://github.com/jzfai/vue3-admin-plus/releases/tag/v1.5.5`
+          },
+          {
+            text: '链接',
+            items: [
+              {
+                text: 'vue3-admin-template',
+                link: 'https://github.com/jzfai/vue3-admin-template'
+              },
+              {
+                text: 'vue3-admin-ts',
+                link: 'https://github.com/jzfai/vue3-admin-ts'
+              },
+              {
+                text: 'vue3-admin-doc',
+                link: 'https://github.com/jzfai/vue3-admin-doc'
+              },
+              {
+                text: 'micro-service-plus',
+                link: 'https://github.com/jzfai/micro-service-plus'
+              }
+            ]
           }
         ],
         sidebar: sidebarZh
@@ -59,10 +80,31 @@ export default defineConfig({
         selectText: 'English',
         nextLinks: true,
         nav: [
-          { text: 'Guide', link: '/guide/' },
+          { text: 'Guide', link: '/guide/start' },
           {
             text: 'Update Log',
             link: 'https://github.com/jzfai/vue3-admin-plus/releases/tag/v1.5.5'
+          },
+          {
+            text: 'Links',
+            items: [
+              {
+                text: 'vue3-admin-template',
+                link: 'https://github.com/jzfai/vue3-admin-template'
+              },
+              {
+                text: 'vue3-admin-ts',
+                link: 'https://github.com/jzfai/vue3-admin-ts'
+              },
+              {
+                text: 'vue3-admin-doc',
+                link: 'https://github.com/jzfai/vue3-admin-doc'
+              },
+              {
+                text: 'micro-service-plus',
+                link: 'https://github.com/jzfai/micro-service-plus'
+              }
+            ]
           }
         ],
         sidebar: sidebar

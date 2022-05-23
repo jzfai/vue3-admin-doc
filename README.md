@@ -17,7 +17,7 @@ cd vue3-admin-doc
 
 # install dependency(Recommend use pnpm)
 #you can run npm i -g pnpm to install it  
-pnpm
+pnpm i
 
 # develop
 pnpm run dev

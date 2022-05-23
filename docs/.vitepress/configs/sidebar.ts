@@ -1,10 +1,18 @@
 export default [
   {
-    text: 'Video And Doc',
+    text: 'Getting Started',
     children: [
       {
-        text: '带你用vue3+vite2撸后台',
+        text: '起步',
         link: '/guide/'
+      },
+      {
+        text: '相关视频和更新日志',
+        link: '/guide/video-doc'
+      },
+      {
+        text: 'vscode和webstrom如何配置',
+        link: '/guide/vscode-webstrom-setting'
       }
     ]
   },
@@ -13,27 +21,35 @@ export default [
     children: [
       {
         text: '目录结构介绍',
-        link: '/guide/dir-instruct'
+        link: '/zh/guide/dir-instruct'
       },
       {
         text: '多环境设置',
-        link: '/guide/env-setting'
+        link: '/zh/guide/env-setting'
       },
       {
         text: '配置篇(settings.js)',
-        link: '/guide/setting'
+        link: '/zh/guide/setting'
+      },
+      {
+        text: 'axios使用及请求取消',
+        link: '/zh/guide/axios-req'
+      },
+      {
+        text: '全局错误日志收集 ',
+        link: '/zh/guide/error-collection'
       },
       {
         text: 'mock篇',
-        link: '/guide/mock'
+        link: '/zh/guide/mock'
       },
       {
         text: 'vite.config.js配置',
-        link: '/guide/vite-config'
+        link: '/zh/guide/vite-config'
       },
       {
         text: 'i18n国际化语言',
-        link: '/guide/i18n'
+        link: '/zh/guide/i18n'
       }
     ]
   },
