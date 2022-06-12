@@ -1,3 +1,4 @@
+// @ts-ignore
 import { defineConfig } from 'vitepress'
 
 //en
@@ -49,7 +50,7 @@ export default defineConfig({
           // { text: `API 参考`, link: `${prefix}api/` },
           {
             text: `更新日志`,
-            link: `https://github.com/jzfai/vue3-admin-plus/releases/tag/v1.5.5`
+            link: `https://github.com/jzfai/vue3-admin-plus/releases`
           },
           {
             text: '链接',
@@ -83,7 +84,7 @@ export default defineConfig({
           { text: 'Guide', link: '/guide/start' },
           {
             text: 'Update Log',
-            link: 'https://github.com/jzfai/vue3-admin-plus/releases/tag/v1.5.5'
+            link: 'https://github.com/jzfai/vue3-admin-plus/releases'
           },
           {
             text: 'Links',
