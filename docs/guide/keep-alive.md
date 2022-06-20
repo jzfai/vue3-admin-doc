@@ -296,8 +296,8 @@ router/index.js
 
 ```javascript
 //如果配置了cachePage: true 则当前页面进入后，进行缓存。 默认是false
-//若果配置了leaveRmCachePage：true 则当前页离开后，页面会被移除缓存。默认是false
-meta: { title: 'Keep-Alive', cachePage: true, leaveRmCachePage: ture }
+//如果配置了closeTabRmCache：true 则当前页离开后，页面会被移除缓存。默认是false
+meta: { title: 'Keep-Alive', cachePage: true, closeTabRmCache: true }
 ```
 
 > cachePage: true, leaveRmCachePage: ture -> 进入时缓存，关闭时移除缓存
