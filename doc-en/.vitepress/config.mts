@@ -44,7 +44,7 @@ export default defineConfig({
     localeLinks: {
       text: '简体中文',
       items: [
-        { text: 'English', link: 'https://github.jzfai.top/vue3-admin-doc' },
+        { text: 'English', link: 'https://github.jzfai.top/vue3-admin-cn-doc' },
         // { text: '日本語', link: 'https://ja.vitejs.dev' },
         // { text: 'Español', link: 'https://es.vitejs.dev' }
       ]
