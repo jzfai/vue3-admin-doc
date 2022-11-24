@@ -31,7 +31,7 @@ export default defineConfig({
     socialLinks: [
       // { icon: 'twitter', link: 'https://twitter.com/vite_js' },
       { icon: 'discord', link: 'https://github.jzfai.top/file/images/wx-groud.png' },
-      { icon: 'github', link: 'https://github.com/jzfai/vue3-admin-plus.git' }
+      { icon: 'github', link: 'https://github.com/jzfai/vue3-admin-doc.git' }
     ],
     algolia: {
       appId: '7H67QR5P0A',
