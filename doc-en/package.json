@@ -1,0 +1,9 @@
+{
+  "name": "doc-cn",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "vitepress dev .",
+    "build": "vitepress build ."
+  }
+}
