@@ -55,3 +55,9 @@ vue3-admin系列主要分为 vue3-admin-template,  vue3-admin-ts  ,  vue3-admin-
 
 以上工具没有的话，请先百度，下载即可
 
+
+
+## 视频
+
+[官方视频](https://ke.qq.com/webcourse/index.html?r=1670380876194#cid=5887010&term_id=106103893&taid=14794800835974178&type=3072&source=PC_COURSE_DETAIL&vid=243791576755777190)
+

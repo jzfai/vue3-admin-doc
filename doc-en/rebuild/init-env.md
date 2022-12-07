@@ -215,6 +215,8 @@ console.log(import.meta.env.VITE_APP_BASE_URL)
 
 
 
-源码和视频地址
+## 源码和官方视频
 
-[搭建vue3+vite3工程及多环境配置源码](https://gitee.com/jzfai/vue3-admin-learn-code/tree/%E6%90%AD%E5%BB%BAvue3%2Bvite3%E5%B7%A5%E7%A8%8B%E5%8F%8A%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/)
+[源码](https://gitee.com/jzfai/vue3-admin-learn-code/tree/%E6%90%AD%E5%BB%BAvue3%2Bvite3%E5%B7%A5%E7%A8%8B%E5%8F%8A%E5%A4%9A%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/)
+
+[官方视频](https://ke.qq.com/webcourse/index.html?r=1670381039292#cid=5887010&term_id=106103893&taid=14794813720876066&type=3072&source=PC_COURSE_DETAIL&vid=243791576754783624)

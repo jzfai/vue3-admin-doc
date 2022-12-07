@@ -512,4 +512,8 @@ export default defineComponent({
 
 
 
+## 视频地址
+
+[官方视频](https://ke.qq.com/webcourse/index.html?r=1670382084128#cid=5887010&term_id=106103893&taid=14794860965516322&type=3072&source=PC_COURSE_DETAIL&vid=243791576754774179)
+
 

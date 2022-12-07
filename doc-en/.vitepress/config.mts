@@ -9,7 +9,7 @@ const ogUrl = 'https://vitejs.dev'
 export default defineConfig({
   title: 'vue3-admin-plus',
   description: '下一代前端工具链',
-  base: '/vue3-admin-en-doc',
+  base: '/vue3-admin-doc',
   lang: 'zh-CN',
   head: [
     ['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }],
@@ -154,15 +154,20 @@ export default defineConfig({
               link: '/rebuild/index'
             },
             {
-              text: '搭建一个框架需要什么',
+              text: '如何搭建一个框架',
               link: '/rebuild/how-to-build'
             },
             {
               text: 'vue3+vite3工程及多环境配置',
               link: '/rebuild/init-env'
-            },
+            }
+          ]
+        },
+        {
+          text: '代码规范集成',
+          items: [
             {
-              text: 'eslint,husky,pretties集成',
+              text: 'eslint husky pretties集成',
               link: '/rebuild/code-format'
             }
           ]
@@ -182,10 +187,25 @@ export default defineConfig({
               text: 'mock开发和生产环境集成',
               link: '/rebuild/mock-inter'
             },
+
+          ]
+        },
+        {
+          text: '国际化语言',
+          items: [
             {
               text: 'i18n和element-plus国际化语言',
               link: '/rebuild/i18n-inter'
             },
+          ]
+        },
+        {
+          text: 'vite常用插件集成',
+          items: [
+            {
+              text: 'vite常用插件',
+              link: '/rebuild/vite-plugin'
+            }
           ]
         },
         {
@@ -199,19 +219,15 @@ export default defineConfig({
               text: 'vue3基础及vue2快速转换vue3',
               link: '/rebuild/vue3-basic'
             },
-            {
-              text: 'vite常用插件集成',
-              link: '/rebuild/vite-plugin'
-            },
+
             {
               text: 'pinia及持久化集成使用',
               link: '/rebuild/pinia'
             },
           ]
         },
-
         {
-          text: 'typescript',
+          text: 'typescript基础及集成',
           items: [
             {
               text: 'typescript基础',
@@ -239,7 +255,20 @@ export default defineConfig({
               link: '/rebuild/layout'
             },
           ]
-        }
+        },
+        {
+          text: '自定义vite插件',
+          items: [
+            {
+              text: 'vite插件基础',
+              link: '/rebuild/vite-basic'
+            },
+            {
+              text: 'vite插件例子',
+              link: '/rebuild/vite-demo'
+            }
+          ]
+        },
       ]
     }
   },

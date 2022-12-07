@@ -144,6 +144,8 @@ let locale = $ref(zhCn);
 
 
 
-源码和视频地址
+## 源码和官方视频
 
-[element-plus集成及全局配置](https://gitee.com/jzfai/vue3-admin-learn-code/tree/element-plus%E9%9B%86%E6%88%90%E5%8F%8A%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE/)
+[源码](https://gitee.com/jzfai/vue3-admin-learn-code/tree/element-plus%E9%9B%86%E6%88%90%E5%8F%8A%E5%85%A8%E5%B1%80%E9%85%8D%E7%BD%AE/)
+
+[官方视频](https://ke.qq.com/webcourse/index.html?r=1670381521157#cid=5887010&term_id=106103893&taid=14794839490679842&type=3072&source=PC_COURSE_DETAIL&vid=243791576755031333)

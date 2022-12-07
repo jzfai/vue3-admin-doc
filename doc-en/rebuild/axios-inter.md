@@ -10,8 +10,6 @@
 pnpm add axios@0.21.3 -S
 ```
 
-
-
 ## 配置
 
 新建文件     src/utils/axiosReq.js
@@ -203,6 +201,9 @@ const cancelReq = () => {
 
 
 
-源码或视频
+## 源码或官方视频
 
-[axios请求集成源码](https://gitee.com/jzfai/vue3-admin-learn-code/tree/axios%E8%AF%B7%E6%B1%82%E9%9B%86%E6%88%90/)
+[源码](https://gitee.com/jzfai/vue3-admin-learn-code/tree/axios%E8%AF%B7%E6%B1%82%E9%9B%86%E6%88%90/)
+
+[官方视频](https://gitee.com/jzfai/vue3-admin-learn-code/tree/axios%E8%AF%B7%E6%B1%82%E9%9B%86%E6%88%90/)
+

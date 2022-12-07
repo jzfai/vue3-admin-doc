@@ -350,7 +350,7 @@ export default {
 
 
 
-## 源码或视频地址
+## 视频
 
-[登录和路由权限篇(进阶)](https://gitee.com/jzfai/vue3-admin-learn-code/tree/%E7%99%BB%E5%BD%95%E5%92%8C%E8%B7%AF%E7%94%B1%E6%9D%83%E9%99%90%E7%AF%87(%E8%BF%9B%E9%98%B6)/)
+[官方视频](https://ke.qq.com/webcourse/index.html?r=1670382031414#cid=5887010&term_id=106103893&taid=14794929684993058&type=3072&source=PC_COURSE_DETAIL&vid=243791576754712298)
 

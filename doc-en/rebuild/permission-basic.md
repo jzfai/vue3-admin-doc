@@ -339,6 +339,9 @@ router.afterEach(() => {})
 
 
 
-## 源码或视频地址
+## 源码或视频
 
-[登录和路由权限篇(基础)](https://gitee.com/jzfai/vue3-admin-learn-code.git)
+[源码](https://gitee.com/jzfai/vue3-admin-learn-code.git)
+
+[官方视频](https://ke.qq.com/webcourse/index.html?r=1670381873868#cid=5887010&term_id=106103893&taid=14794933979960354&type=3072&source=PC_COURSE_DETAIL&vid=243791576755779469)
+

@@ -246,3 +246,7 @@ app-main/index.vue
 ```
 
 >提供 router-view 接收，二级路由页面 
+
+## 源码或视频
+
+[官方视频](https://ke.qq.com/webcourse/index.html?r=1670381780005#cid=5887010&term_id=106103893&taid=14794946864862242&type=3072&source=PC_COURSE_DETAIL&vid=243791576754877341)

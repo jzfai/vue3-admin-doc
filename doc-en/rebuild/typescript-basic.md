@@ -331,5 +331,7 @@ declare global {
 
 ## 源码或视频
 
-[typescript基础](https://gitee.com/jzfai/vue3-admin-learn-code/tree/typescript%E5%9F%BA%E7%A1%80/)
+[源码](https://gitee.com/jzfai/vue3-admin-learn-code/tree/typescript%E5%9F%BA%E7%A1%80/)
+
+[官方视频](https://ke.qq.com/webcourse/index.html?r=1670381985869#cid=5887010&term_id=106103893&taid=14794908210156578&type=3072&source=PC_COURSE_DETAIL&vid=243791576755025940)
 

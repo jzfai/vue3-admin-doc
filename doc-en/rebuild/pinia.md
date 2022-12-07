@@ -141,7 +141,9 @@ pinia推荐学习教程：
 
 
 
-## 源码源码或视频地址
+## 源码或视频
 
-[pinia及持久化集成使用](https://gitee.com/jzfai/vue3-admin-learn-code/blob/pinia/src/components/PiniaDemo.vue)
+[源码](https://gitee.com/jzfai/vue3-admin-learn-code/blob/pinia/src/components/PiniaDemo.vue)
+
+[官方视频](https://ke.qq.com/webcourse/index.html?r=1670381936850#cid=5887010&term_id=106103893&taid=14794899620221986&type=3072&source=PC_COURSE_DETAIL&vid=243791576755218172)
 

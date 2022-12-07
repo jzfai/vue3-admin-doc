@@ -176,9 +176,7 @@ const switchLang = () => {
 
 
 
-源码地址：
+## 源码或视频
 
-[i18n和element-plus国际化语言源码]()
-
-
+[视频](https://ke.qq.com/webcourse/index.html?r=1670381704894#cid=5887010&notShowNextTask=0&source=PC_COURSE_DETAIL&taid=14794852375581730&term_id=106103893&type=3072&vid=243791576754702313)
 

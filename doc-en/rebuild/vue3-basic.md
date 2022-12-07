@@ -251,6 +251,9 @@ watch(
 
 
 
-视频和源码地址
+## 视频或源码地址
 
-[vue3基础及vue2快速转换vue3](https://gitee.com/jzfai/vue3-admin-learn-code/tree/vue3%E5%9F%BA%E7%A1%80%E5%8F%8Avue2%E5%BF%AB%E9%80%9F%E8%BD%AC%E6%8D%A2vue3/)
+[源码](https://gitee.com/jzfai/vue3-admin-learn-code/tree/vue3%E5%9F%BA%E7%A1%80%E5%8F%8Avue2%E5%BF%AB%E9%80%9F%E8%BD%AC%E6%8D%A2vue3/)
+
+[官方视频](https://ke.qq.com/webcourse/index.html?r=1670382125569#cid=5887010&term_id=106103893&taid=14794813720876066&type=3072&source=PC_COURSE_DETAIL&vid=243791576754783624)
+

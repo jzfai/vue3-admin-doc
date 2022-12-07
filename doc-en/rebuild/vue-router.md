@@ -171,8 +171,9 @@ const promiseTest = () => {
 
 
 
+## 源码和官方视频
 
+[源码](https://gitee.com/jzfai/vue3-admin-learn-code/tree/vue-router%E9%9B%86%E6%88%90%E5%8F%8A%E8%B7%AF%E7%94%B1%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/)
 
-#### 源码和视频地址
+[官方视频](https://ke.qq.com/webcourse/index.html?r=1670381415581#cid=5887010&term_id=106103893&taid=14794886735320098&type=3072&source=PC_COURSE_DETAIL&vid=243791576754828547)
 
-[搭建vue3+vite3工程及多环境配置源码](https://gitee.com/jzfai/vue3-admin-learn-code/tree/vue-router%E9%9B%86%E6%88%90%E5%8F%8A%E8%B7%AF%E7%94%B1%E6%9D%83%E9%99%90%E9%85%8D%E7%BD%AE%E4%BD%BF%E7%94%A8/)

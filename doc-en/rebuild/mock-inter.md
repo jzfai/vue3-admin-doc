@@ -125,6 +125,9 @@ plugins: [
 
 
 
-源码或视频地址：
+## 源码或视频
 
-[mock开发和生产环境集成](https://gitee.com/jzfai/vue3-admin-learn-code/tree/mock%E5%BC%80%E5%8F%91%E5%92%8C%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E9%9B%86%E6%88%90/)
+[源码](https://gitee.com/jzfai/vue3-admin-learn-code/tree/mock%E5%BC%80%E5%8F%91%E5%92%8C%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E9%9B%86%E6%88%90/)
+
+[官方视频](https://ke.qq.com/webcourse/index.html?r=1670381830305#cid=5887010&term_id=106103893&taid=14794848080614434&type=3072&source=PC_COURSE_DETAIL&vid=243791576755296711)
+

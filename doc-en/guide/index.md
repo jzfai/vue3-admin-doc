@@ -1,11 +1,25 @@
 # 开始 {#getting-started}
 
-vue3-admin系列主要分为 vue3-admin-template, vue3-element-ts ,vue3-element-plus
+vue3-admin系列主要分为 vue3-admin-template, vue3-admin-ts ,vue3-admin-plus,vue3-admin-electron
 
 -  [vue3-admin-template](https://github.com/jzfai/vue3-admin-template.git) ——  基础版本(入门选择)
--  [vue3-element-ts](https://github.com/jzfai/vue3-admin-ts.git)  ——  vue3-admin-template的typescript版本
--  [vue3-element-plus](https://github.com/jzfai/vue3-admin-plus.git) ——  在vue3-admin-ts基础上提供企业级开发实例
+-  [vue3-admin-ts](https://github.com/jzfai/vue3-admin-ts.git)  ——  vue3-admin-template的typescript版本
+-  [vue3-admin-plus](https://github.com/jzfai/vue3-admin-plus.git) ——  vue3-admin-ts基础上提供企业级开发实例
+-  [vue3-admin-electron](https://github.com/jzfai/vue3-admin-electron) ——  vue3-admin-plus桌面端版本
 
+## 官方视频(推荐)
+
+[vue3-admin-plus官方视频教程](https://ke.qq.com/course/5887010#term_id=106103893)
+
+讲述了: vue3基础->vue3+vite基础环境搭建->vue3全家桶(pinia)->vite常用插件->typescript集成->rbac权限->layout核心布局->自定义vite插件
+
+**本视频课程覆盖了未来1-5年内前端最新的知识点**
+
+
+注：如购买了视频，请凭订单号入群
+[vue3-admin-plus官方视频](https://github.jzfai.top/file/images/vue3-admin-video.png)
+
+[群码失效](https://github.jzfai.top/file/images/owner-image.png)
 
 ## 总览 {#overview}
 
