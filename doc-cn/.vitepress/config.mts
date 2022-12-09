@@ -54,8 +54,7 @@ export default defineConfig({
         '本中文文档内容版权为 vue3-admin-plus 官方中文翻译团队所有，保留所有权利。'
     },
     nav:[
-      { text: '指引', link: '/guide/', activeMatch: '/guide/' },
-      { text: '框架搭建', link: '/rebuild/', activeMatch: '/rebuild/' },
+      { text: '指引', link: '/guide/', activeMatch: '/guide/' }
     ],
     sidebar: {
       '/guide/': [
@@ -142,102 +141,6 @@ export default defineConfig({
               text: '如何解决跨域',
               link: '/guide/cors'
             }
-          ]
-        }
-      ],
-      '/rebuild/': [
-        {
-          text: '基础环境搭建',
-          items: [
-            {
-              text: '前言及工具准备',
-              link: '/rebuild/index'
-            },
-            {
-              text: '搭建一个框架需要什么',
-              link: '/rebuild/how-to-build'
-            },
-            {
-              text: 'vue3+vite3工程及多环境配置',
-              link: '/rebuild/init-env'
-            },
-            {
-              text: 'eslint,husky,pretties集成',
-              link: '/rebuild/code-format'
-            }
-          ]
-        },
-        {
-          text: '请求和样式',
-          items: [
-            {
-              text: 'element-plus集成及全局配置',
-              link: '/rebuild/element-plus-inter'
-            },
-            {
-              text: 'axios请求集成及取消请求',
-              link: '/rebuild/axios-inter'
-            },
-            {
-              text: 'mock开发和生产环境集成',
-              link: '/rebuild/mock-inter'
-            },
-            {
-              text: 'i18n和element-plus国际化语言',
-              link: '/rebuild/i18n-inter'
-            },
-          ]
-        },
-        {
-          text: 'vue3全家桶',
-          items: [
-            {
-              text: 'vue-router集成及路由权限',
-              link: '/rebuild/vue-router'
-            },
-            {
-              text: 'vue3基础及vue2快速转换vue3',
-              link: '/rebuild/vue3-basic'
-            },
-            {
-              text: 'vite常用插件集成',
-              link: '/rebuild/vite-plugin'
-            },
-            {
-              text: 'pinia及持久化集成使用',
-              link: '/rebuild/pinia'
-            },
-          ]
-        },
-
-        {
-          text: 'typescript',
-          items: [
-            {
-              text: 'typescript基础',
-              link: '/rebuild/typescript-basic'
-            },
-            {
-              text: 'typescript集成到框架',
-              link: '/rebuild/typescript-inter'
-            }
-          ]
-        },
-        {
-          text: '权限和布局',
-          items: [
-            {
-              text: '登录和路由权限篇(基础)',
-              link: '/rebuild/permission-basic'
-            },
-            {
-              text: '登录和路由权限篇(进阶)',
-              link: '/rebuild/permission-inter'
-            },
-            {
-              text: 'layout核心布局讲解',
-              link: '/rebuild/layout'
-            },
           ]
         }
       ]

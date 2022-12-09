@@ -9,17 +9,12 @@ vue3-admin系列主要分为 vue3-admin-template, vue3-admin-ts ,vue3-admin-plus
 
 ## 官方视频(推荐)
 
-[vue3-admin-plus官方视频教程](https://ke.qq.com/course/5887010#term_id=106103893)
+[vue3-admin-plus官方视频教程](https://study.163.com/course/courseMain.htm?courseId=1213174818&share=2&shareId=480000002291564)
 
 讲述了: vue3基础->vue3+vite基础环境搭建->vue3全家桶(pinia)->vite常用插件->typescript集成->rbac权限->layout核心布局->自定义vite插件
 
 **本视频课程覆盖了未来1-5年内前端最新的知识点**
 
-
-注：如购买了视频，请凭订单号入群
-[vue3-admin-plus官方视频](https://github.jzfai.top/file/images/vue3-admin-video.png)
-
-[群码失效](https://github.jzfai.top/file/images/owner-image.png)
 
 ## 总览 {#overview}
 
