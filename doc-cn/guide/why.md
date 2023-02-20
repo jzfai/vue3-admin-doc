@@ -1,3 +1,7 @@
+---
+lang: zh-CN
+---
+
 # 为什么选 vue3-admin-plus 
 
 ## 现实问题

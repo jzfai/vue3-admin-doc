@@ -1,3 +1,7 @@
+---
+lang: zh-CN
+---
+
 # 前言
 
 本篇介绍vue3-admin-plus常用目录结构

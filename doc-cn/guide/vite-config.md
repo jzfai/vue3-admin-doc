@@ -1,3 +1,8 @@
+---
+lang: zh-CN
+---
+
+
 # 前言
 
 本篇主要介绍vite的配置，及为什么要使用vite而不用webpack

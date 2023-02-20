@@ -1,3 +1,8 @@
+---
+lang: zh-CN
+---
+
+
 # 前言
 
 #### 本篇主要介绍vue3-admin系列如何实现主题色，主要分为两部分 ， vue3-admin-plus和element-ui  主题色变更

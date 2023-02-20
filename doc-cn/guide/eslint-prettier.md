@@ -1,3 +1,7 @@
+---
+lang: zh-CN
+---
+
 # 前言
 
 我们主要介绍下：代码格式eslint+pretty，以及husky 使用

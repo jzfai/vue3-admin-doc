@@ -42,21 +42,18 @@ export default defineConfig({
         facetFilters: ['tags:cn']
       }
     },
-    // @ts-ignore
-    localeLinks: {
-      text: '简体中文',
-      items: [
-        { text: 'English', link: 'https://github.jzfai.top/vue3-admin-doc' },
-        // { text: '日本語', link: 'https://ja.vitejs.dev' },
-        // { text: 'Español', link: 'https://es.vitejs.dev' }
-      ]
-    },
     footer: {
       copyright:
         '本中文文档内容版权为 vue3-admin-plus 官方中文翻译团队所有，保留所有权利。'
     },
     nav:[
-      { text: '指引', link: '/guide/', activeMatch: '/guide/' }
+      { text: '指引', link: '/guide/', activeMatch: '/guide/' },
+      {
+        text: '语言',
+        items: [
+          { text: 'English', link: 'https://github.jzfai.top/vue3-admin-doc' },
+        ]
+      }
     ],
     sidebar: {
       '/guide/': [

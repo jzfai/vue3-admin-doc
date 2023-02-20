@@ -1,3 +1,7 @@
+---
+lang: zh-CN
+---
+
 # 开始 {#getting-started}
 
 vue3-admin系列主要分为 vue3-admin-template, vue3-admin-ts ,vue3-admin-plus,vue3-admin-electron
