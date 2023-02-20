@@ -1,24 +1,22 @@
-# 为什么选 vue3-admin-plus 
+# Why vue3-admin-plus 
 
-## 现实问题
+## Challenges
 
-当你开发的项目越来越大时首次启动速度会变得越来越慢，每次更新时都要等上一段时间，严重影响了开发效率
+When you develop a larger and larger project the first start-up speed will become slower and slower, each time the update will have to wait for a period of time, seriously affecting the development efficiency.
 
-vue3-admin-plus采用vue3全家桶技术结合vite进行打包开发，有效解决了上面问题
-
-
-
-## 为什么要选用vite  
-
-- 开发阶段vite首次启动非常快，而且不会因为项目的变大，而变的缓慢
-
-- Vite 为 Vue 提供第一优先级支持
-
->[为什么要选用vite](https://vitejs.cn/guide/why.html#slow-server-start)
+vue3-admin-plus effectively solves the above problems.
 
 
 
-## vite3和webpack对比
+## Why Vite  
+
+- Vite improves the dev server start time by first dividing the modules in an application into two categories: dependencies and source code.
+
+>[why vite](https://vitejs.cn/guide/why.html#slow-server-start)
+
+
+
+## Vite3 VS Webpack
 
 这里以[vue3-element-plus](https://github.com/jzfai/vue3-admin-plus.git)和[vue-element-admin]( https://github.com/PanJiaChen/vue-element-admin.git)在运行，打包和构建后大小进行对比
 

@@ -1,43 +1,43 @@
-# 开始 {#getting-started}
+# Getting Start {#getting-started}
 
-vue3-admin系列主要分为 vue3-admin-template, vue3-admin-ts ,vue3-admin-plus,vue3-admin-electron
+vue3-admin is divided into the following versions: vue3-admin-template, vue3-admin-ts ,vue3-admin-plus,vue3-admin-electron
 
--  [vue3-admin-template](https://github.com/jzfai/vue3-admin-template.git) ——  基础版本(入门选择)
--  [vue3-admin-ts](https://github.com/jzfai/vue3-admin-ts.git)  ——  vue3-admin-template的typescript版本
--  [vue3-admin-plus](https://github.com/jzfai/vue3-admin-plus.git) ——  vue3-admin-ts基础上提供企业级开发实例
--  [vue3-admin-electron](https://github.com/jzfai/vue3-admin-electron) ——  vue3-admin-plus桌面端版本
+-  [vue3-admin-template](https://github.com/jzfai/vue3-admin-template.git) ——  vue3-admin-template(More friendly for beginners)
+-  [vue3-admin-ts](https://github.com/jzfai/vue3-admin-ts.git)  ——  vue3-admin-ts(With typescript)
+-  [vue3-admin-plus](https://github.com/jzfai/vue3-admin-plus.git) ——  vue3-admin-plus(Main version)
+-  [vue3-admin-electron](https://github.com/jzfai/vue3-admin-electron) ——  vue3-admin-electron(For desktop)
 
-## 官方视频(推荐)
+## Videos(hot)
 
-[vue3-admin-plus官方视频教程](https://study.163.com/course/courseMain.htm?courseId=1213174818&share=2&shareId=480000002291564)
+[vue3-admin-plus videos by contributors](https://study.163.com/course/courseMain.htm?courseId=1213174818&share=2&shareId=480000002291564)
 
-讲述了: vue3基础->vue3+vite基础环境搭建->vue3全家桶(pinia)->vite常用插件->typescript集成->rbac权限->layout核心布局->自定义vite插件
+Main contents: basis of vue3 -> how to make a vue3+vite app -> all stra of vue3(pinia) -> most popular vite plugins -> typescript -> permission with rbac -> layout - core component -> customized vite plugins
 
-**本视频课程覆盖了未来1-5年内前端最新的知识点**
-
-
-## 总览 {#overview}
-
-- 本架构使用的技术为：vue3(setup-script)+vite2+element-plus
-
-- 使用 eslint+prettier+gitHooks 格式和校验代码,提高代码规范性和开发效率
-
-- 使用最先进的包管理工具pnpm
-
-- 使用最新的vue3全家桶技术，能让你快速了解最新的前端知识，实现**弯道超车**
+**This video course covers the latest knowledge of front-end in the next 1-5 years**
 
 
-你可以在 [为什么选 vue3-admin-plus](./why) 中了解更多关于项目的设计初衷。
+## Overview {#overview}
 
-## 浏览器支持 {#browser-support}
+- The technologies used in this architecture are：vue3(setup-script)+vite2+element-plus
 
-Note: Vue3 不在支持IE浏览器
+- Use eslint+prettier+gitHooks formatting and verifying code to improve code specification and development efficiency
 
-## 在线试用 vue3-admin-plus {#trying-vite-online}
+- Use pnpm the most advanced package management tool
 
-[Access address](https://github.jzfai.top/vue3-admin-plus)
+- Use the latest all stra of vue3, can let you quickly understand the latest front knowledge, just **Overtaking at the Bend**
 
-[国内体验地址](https://github.jzfai.top/vue3-admin-plus)
+
+View [why vue3-admin-plus](./why) to get more design inspiration.
+
+## Browser Support {#browser-support}
+
+Note: Vue3 could not run with IE.
+
+## Try it out！ vue3-admin-plus {#trying-vite-online}
+
+[Access Address](https://github.jzfai.top/vue3-admin-plus)
+
+[For China Mainland](https://github.jzfai.top/vue3-admin-plus)
 
 
 ## 搭建第一个 vue3-admin-plus 项目 {#scaffolding-your-first-vite-project}

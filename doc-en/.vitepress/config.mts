@@ -8,7 +8,7 @@ const ogTitle = 'vue3-admin-plus'
 const ogUrl = 'https://vitejs.dev'
 export default defineConfig({
   title: 'vue3-admin-plus',
-  description: '下一代前端工具链',
+  description: 'The next generation solution of front',
   base: '/vue3-admin-doc',
   lang: 'zh-CN',
   head: [
@@ -43,14 +43,15 @@ export default defineConfig({
     },
     footer: {
       copyright:
-        '本中文文档内容版权为 vue3-admin-plus 官方中文翻译团队所有，保留所有权利。'
+        '© Vue3-Admin-Plus-Team Rights Reserved'
     },
     nav:[
-      { text: '指引', link: '/guide/', activeMatch: '/guide/' },
+      { text: 'GUIDE', link: '/guide/', activeMatch: '/guide/' },
       {
         text: 'Language',
         items: [
           { text: '简体中文', link: 'https://github.jzfai.top/vue3-admin-cn-doc' },
+          { text: 'English', link: 'https://github.jzfai.top/vue3-admin-en-doc' },
         ]
       }
     ],
