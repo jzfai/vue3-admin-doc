@@ -24,7 +24,7 @@
 
 ##### 运行相关
 
-- .env.serve-dev：开发环境配置 
+- .env.serve-dev：开发环境配置
 - .env.serve-test：测试环境配置
 
 
@@ -60,11 +60,11 @@ VITE_APP_IMAGE_URL = 'https://github.jzfai.top:8080'
 
 ```json
    "scripts": {
-        "dev": "vite --mode serve-dev"
-    },
+"dev": "vite --mode serve-dev"
+},
 ```
 
->--mode serve-dev  读取文件 .env.serve-dev  
+>--mode serve-dev  读取文件 .env.serve-dev
 
 
 
@@ -77,5 +77,30 @@ VITE_APP_IMAGE_URL = 'https://github.jzfai.top:8080'
 import.meta.env.VITE_APP_BASE_URL
 ```
 
+可以打印查看我们的环境变量
+
+```shell
+console.log(import.meta.env)
+```
 
 
+
+## 全局变量定义
+
+vite.config.js中定义全局变量
+
+```typescript
+define: {
+    //define global var
+    GLOBAL_STRING: JSON.stringify('i am global var from vite.config.js define'),
+    GLOBAL_VAR: { test: 'i am global var from vite.config.js define' }
+},
+```
+
+我们定义了 GLOBAL_STRING  和 GLOBAL_VAR 这两个变量，那么你可以在任意文件中使用
+
+```
+console.log(GLOBAL_STRING)
+```
+
+>注：定义全局变量的值不能是对象或数组

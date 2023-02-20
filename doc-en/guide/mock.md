@@ -4,24 +4,24 @@
 
 官方文档：[vite-plugin-mock](https://github.com/anncwb/vite-plugin-mock/blob/HEAD/README.zh_CN.md)
 
- vite 的数据模拟插件，是基于 vite.js 开发的。 并同时支持本地环境和生产环境。 Connect 服务中间件在本地使用，mockjs 在生产环境中使用 
+vite 的数据模拟插件，是基于 vite.js 开发的。 并同时支持本地环境和生产环境。 Connect 服务中间件在本地使用，mockjs 在生产环境中使用
 
 
 
-## 安装依赖
+## 安装依赖说明
 
 ```shell
-pnpm add  vite-plugin-mock@2.9.6 mockjs@1.1.0 -S
+pnpm add  vite-plugin-mock@2.9.6 mockjs@1.1.0 -D
 ```
 
-## 配置
+## 配置说明
 
 新建mock测试文件   mock/example.js
 
 ```javascript
 export default [
   {
-    url: '/getMapInfo',
+    url: '/mock/getMapInfo',
     method: 'get',
     response: () => {
       return {
@@ -33,10 +33,15 @@ export default [
 ]
 ```
 
+>如果是mock的请求，建议大家以 /mock 开头
+
 vite.config.js
 
 ```javascript
+//vite.config.js
+import { viteMockServe } from 'vite-plugin-mock'
 plugins: [
+    vue(),
     viteMockServe({
         supportTs: true, //是否开启支持ts
         mockPath: 'mock', //设置mockPath为根目录下的mock目录,为根目录
@@ -47,7 +52,7 @@ plugins: [
 ],
 ```
 
-此时 **开发环境的mock** 已经配置好了，如果需要配置生成环境还需要下面的配置
+此时 **开发环境的mock** 已经配置好了，如果需要配置生产环境还需要下面的配置
 
 ## 使用
 
@@ -60,7 +65,7 @@ src/views/dashboard/index.vue
 <script setup>
 import axios from 'axios'
 const listReq = () => {
-  axios.get('/getMapInfo').then((res) => {
+  axios.get('/mock/getMapInfo').then((res) => {
     if (res.data) {
       console.log(res.data)
       alert(res.data.title)
@@ -72,11 +77,15 @@ const listReq = () => {
 
 
 
+
+
 ## 集成生产环境
 
 如果你的mock 需要在build 后的环境使用，那么你需要配置
 
-新建 mock-prod-server.js
+新建 src/mock-prod-server.js
+
+>注要放在 src 下面不然会有问题
 
 ```typescript
 import { createProdMockServer } from 'vite-plugin-mock/es/createProdMockServer'
@@ -101,8 +110,8 @@ plugins: [
       vue(),
       viteMockServe({
         //prod时注入相关的mock请求api,注：mock-prod-server 相对于main.js
-        injectCode: `
-          import { setupProdMockServer } from '../mock-prod-server';
+        injectCode: ` 
+          import { setupProdMockServer } from './mock-prod-server';
           setupProdMockServer();
         `,
          logger: true //是否在控制台显示请求日志
@@ -110,12 +119,6 @@ plugins: [
 ],
 ```
 
-##### 使用
+### 使用
 
 运行  npm run build&&npm run preview   后即可查看效果
-
-
-
-## 源码或视频地址：
-
-[mock开发和生产环境集成源码](https://gitee.com/jzfai/vue3-admin-learn-code/tree/mock%E5%BC%80%E5%8F%91%E5%92%8C%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E9%9B%86%E6%88%90/)

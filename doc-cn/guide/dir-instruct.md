@@ -86,11 +86,11 @@
 
 ```typescript
 //vite.config.ts
- Components({
-        dirs: ['src/components', 'src/icons'],
-        extensions: ['vue'],
-        deep: true,
-        dts: './typings/components.d.ts'
+Components({
+  dirs: ['src/components', 'src/icons'],
+  extensions: ['vue'],
+  deep: true,
+  dts: './typings/components.d.ts'
 }),
 ```
 
@@ -105,9 +105,9 @@ vue3中的新特性hook，和一般的utils相比，可以写状态管理(ref,re
 ```typescript
 //vite.config.ts 
 AutoImport({
-        //配置后会自动扫描目录下的文件
-        dirs: ['src/hooks/**', 'src/utils/**', 'src/store/**', 'src/api/**', 'src/directives/**']
-      }),
+  //配置后会自动扫描目录下的文件
+  dirs: ['src/hooks/**', 'src/utils/**', 'src/store/**', 'src/api/**', 'src/directives/**']
+}),
 ```
 
 >unplugin-auto-import已经自动导入hooks所有文件，可以不用引入直接使用
@@ -152,7 +152,7 @@ icon-class为svg的文件名
 
 >如果需要新增一个svg，去网上下载下来(如iconfont上的图标)，需要.svg结尾的图片，放在相应目录下就行
 
-##### 
+
 
 ## router
 
@@ -160,7 +160,7 @@ icon-class为svg的文件名
 
 
 
-完整里的路由配置参数(这边以项目中的keep-alive路由配置为例)
+完整里的路由配置参数(这边以项目中的keep-alive路由配置为例
 
 ```javascript
 {
@@ -212,7 +212,7 @@ icon-class为svg的文件名
 
 ## store
 
-采用的是pinia(vuex5)技术 
+采用的是pinia(vuex5)技术
 
 - basic.ts： 用户信息，token，及页面基础布局状态存储
 
@@ -231,7 +231,7 @@ icon-class为svg的文件名
 
 - transition.scss：动画相关，如侧边栏的关闭动画等
 
-  
+
 
 ##### reset-elemenet-plus-style.scss：重置element-plus的样式，如：
 
@@ -297,18 +297,6 @@ using demo
 ## utils
 
 - axios-req.ts：axios请求封装
-
 - bus.js：用于vue3中无关组件中的信息传递，类似vue2中的new bus();
-
 - common-util.ts:   手机号，邮箱，金额 等校验，及常用的数组操作api
-
-
-
-
-
-
-
-#### 
-
-
 

@@ -1,85 +1,58 @@
 # 前言
 
-当我们在某些特定场景中需要缓存某个页面，此时就需要用到我们所需要讲的 keep-alive，本篇主要讲解架构中 keep-alive 的原理和使用
+之前基础篇我们已经讲解了keep-alive基础使用，本篇主要讲解架构中keep-alive的二级和三级路由页面自动缓存，tab缓存原理等
 
-[keep-alive 体验地址](https://github.jzfai.top/vue3-admin-template/#/writing-demo/keep-alive)
+[keep-alive体验地址](https://github.jzfai.top/vue3-admin-template/#/writing-demo/keep-alive)
 
-#### 架构 keep-alive 核心源码分析
+## 缓存状态存储
 
-src/layout/components/AppMain.vue
+src/store/basic.js
 
-```javascript
-<transition v-if="settings.mainNeedAnimation" mode="out-in" name="fade-transform">
-  <!-通过keep-alive的include属性，根据组件的name进行缓存，如KeepAlive ->
-  <keep-alive :include="cachedViews">
-    <component :is="Component" :key="key" />
-  </keep-alive>
-</transition>
-
-<script>
-//通过vuex里的cachedViews控制需要缓存的页面
-//cachedViews: Array<string>
-const cachedViews = computed(() => {
-  return store.state.app.cachedViews
-})
-
-// cachePage: true  ->页面初始化后缓存本页面
-// leaveRmCachePage: true -> 页面离开后或者关闭后， 移除本页面缓存
-// leaveRmCachePage和cachePage来自于router里的配置，请看下面介绍
-let oldRoute = null
-//代码原理：通过计算属性监听，当router.path变化是触发get函数调用。从而获取当前路由，根据路由配置信息里的cachePage和leaveRmCachePage决定是否需要缓存和移除缓存
-const key = computed({
-  get() {
-    //页面离开时，如果有cachePage=true和leaveRmCachePage=true，则移除缓存
-    if (oldRoute?.name) {
-      if (oldRoute.meta?.leaveRmCachePage && oldRoute.meta?.cachePage) {
-        store.commit('app/M_DEL_CACHED_VIEW', oldRoute.name)
-      }
+```typescript
+export const useBasicStore = defineStore('basic', {
+  state: () => {
+    return {
+      //keep-alive
+      cachedViews: [], //用于二级路由页面缓存
+      cachedViewsDeep: [],//用于三级路由页面缓存
     }
-    //页面进入时如果有cachePage=true，则设置缓存
-    if (route.name) {
-      if (route.meta?.cachePage) {
-        store.commit('app/M_ADD_CACHED_VIEW', route.name)
-      }
+  },
+  actions: {
+    /*二级路由缓存*/
+    addCachedView(view) {
+      this.$patch((state) => {
+        if (state.cachedViews.includes(view)) return
+        state.cachedViews.push(view)
+      })
+    },
+    delCachedView(view) {
+      this.$patch((state) => {
+        const index = state.cachedViews.indexOf(view)
+        index > -1 && state.cachedViews.splice(index, 1)
+      })
+    },
+    /*三级路由缓存*/
+    addCachedViewDeep(view) {
+      this.$patch((state) => {
+        if (state.cachedViewsDeep.includes(view)) return
+        state.cachedViewsDeep.push(view)
+      })
+    },
+    delCacheViewDeep(view) {
+      this.$patch((state) => {
+        const index = state.cachedViewsDeep.indexOf(view)
+        index > -1 && state.cachedViewsDeep.splice(index, 1)
+      })
     }
-    //保存上一个路由信息（也就是当前页面的路由信息）
-    oldRoute = JSON.parse(JSON.stringify({ name: route.name, meta: route.meta }))
-    return route.path
   }
 })
-</script>
 ```
+
+
 
 ## 如何使用
 
-src/router/index.js
-
-```javascript
-     {
-        path: 'keep-alive',
-        component: () => import('@/views/example/keep-alive'),
-        name: 'KeepAlive',
-        //如果配置了cachePage: true 则当前页面进入后，进行缓存。 默认是false
-        //若果配置了leaveRmCachePage：true 则当前页离开后，页面会被移除缓存。默认是false
-        meta: { title: 'Keep-Alive', cachePage: true, leaveRmCachePage: false }
-      },
-      {
-        path: 'router-demo-f',
-        name: 'routerDemoF',
-        hidden: true,
-        component: () => import('@/views/example/keep-alive/RouterDemoF.vue'),
-        meta: { title: 'RouterDemo-F', cachePage: true, activeMenu: '/writing-demo/keep-alive' }
-      },
-      {
-        path: 'router-demo-s',
-        name: 'routerDemoS',
-        hidden: true,
-        component: () => import('@/views/example/keep-alive/RouterDemoS.vue'),
-        meta: { title: 'RouterDemo-S', cachePage: true, activeMenu: '/writing-demo/keep-alive' }
-      }
-```
-
-在 meta 里设置**cachePage**或者**leaveRmCachePage**，决定是否需要缓存和移除缓存
+在meta里设置**cachePage**或者**leaveRmCachePage**，决定是否需要缓存和移除缓存
 各种组合情况
 
 ```javascript
@@ -89,7 +62,7 @@ cachePage: true, leaveRmCachePage: false  -> 页面进入时缓存，离开时�
 ```
 
 注意: 每个需要缓存的组件需要设置**组件名字**
-组件设置的名字要和路由的**name**相同，因为 keepAlive 缓存就是根据组件的名字缓存的
+组件设置的名字要和路由的**name**相同，因为keepAlive缓存就是根据组件的名字缓存的
 
 ```javascript
 <!--
@@ -98,9 +71,7 @@ cachePage: true, leaveRmCachePage: false  -> 页面进入时缓存，离开时�
 2.在路由配置处设置cachePage：即可缓存
 -->
 <script setup name="KeepAlive">
-
 </script>
-
 //路由的name
 {
     path: 'keep-alive',
@@ -109,189 +80,280 @@ cachePage: true, leaveRmCachePage: false  -> 页面进入时缓存，离开时�
 }
 ```
 
-## 如果深层次页面缓存呢
+## keep-alive核心源码分析
 
-有时我们会有这种业务场景
-
-![1644546522483](https://github.jzfai.top/file/vap-assets/1644546522483.png)
-
-从 A 页面跳到 B 页面在到 C 页面，此时需要 A,B,C 页面都需要缓存。保存 A,B,C 页面的状态，如 A 页面的列表搜索条件等。但是如果跳出 A,B,C 页面时需要同时清空 A,B,C 页面的缓存，如：
-
-![1644546982434](https://github.jzfai.top/file/vap-assets/1644546982434.png)
-
-#### 实现原理
-
-![1644546489961](https://github.jzfai.top/file/vap-assets/1644546489961.png)
-
-##### 核心代码
-
-src/views/example/keep-alive/KeepAlive.vue
-
-```javascript
-const $route = useRoute()
-const $store = useStore()
-// cacheGroup为缓存分组  KeepAlive->routerDemoF->routerDemoS
-let cacheGroup = ['KeepAlive', 'routerDemoF', 'routerDemoS']
-const unWatch = watch(
-  () => $route.name,
-  () => {
-    //如果进入的页面路由name没有在cacheGroup中，则清空这个cacheGroup配置的页面缓存
-    if (!cacheGroup.includes($route.name)) {
-      //sleep(300) -> 等进入其他页面后在进行页面缓存清空， 用于页面性能优化
-      useCommon()
-        .sleep(300)
-        .then(() => {
-          //遍历cacheGroup清空页面缓存
-          cacheGroup.forEach((fItem) =>
-            $store.commit('app/M_DEL_CACHED_VIEW', fItem)
-          )
-        })
-      //remove watch
-      unWatch()
-    }
-  },
-  //deep: true
-  //immediate进入页面立即监听
-  { immediate: true }
-)
-```
-
-## 多级路由如何进行页面缓存呢
+## 二级路由缓存源码分析
 
 [多级路由页面缓存体验地址](https://github.jzfai.top/vue3-admin-template/#writing-demo/deep-router-keep-alive/deep-children)
 
-核心源码分析
-
-src/layout/components/AppMain.vue
+src/layout/app-main/index.vue
 
 ```javascript
-//oldRoute:记录当前路由对象
-let oldRoute = null
-//deepOldRouter:记录3级路由对象
+<script setup>
+import { useBasicStore } from '@/store/basic'
+const appStore = useBasicStore()
+const route = useRoute()
+const settings = computed(() => {
+  return appStore.settings
+})
+
+const key = computed(() => route.path)
+//cachedViews: Array<string>  存储页面name
+const cachedViews = computed(() => {
+  return appStore.cachedViews
+})
+
+let oldRoute = {}
 let deepOldRouter = null
-const key = computed({
-  get() {
-    //获取路由等级 route.matched.length
+
+//移除当前页下的children缓存
+const removeDeepChildren = (deepOldRouter) => {
+  deepOldRouter.children?.forEach((fItem) => {
+    appStore.setCacheViewDeep(fItem.name)
+  })
+}
+
+// cachePage: true  ->页面初始化后缓存本页面
+// leaveRmCachePage: true -> 页面离开后或者关闭后， 移除本页面缓存 
+// leaveRmCachePage和cachePage来自于router里的配置，请看下面介绍
+
+//注：
+// appStore.cachedViews:控制二级路由缓存
+// appStore.cachedViewsDeep:控制三级路由缓存
+
+//代码原理：通过监听路由里的name。从而获取当前路由，根据路由配置信息里的cachePage和leaveRmCachePage决定是否需要缓存和移除缓存
+watch(
+  () => route.name,
+  () => {
+    //获取几级路由,如：routerLevel === 2 二级路由
     const routerLevel = route.matched.length
-    //如果路由等级为2级处理流程
+    //二级路由处理
     if (routerLevel === 2) {
-      //判断是否存在deepOldRouter，如果有则说明从3级路由跳转到2级路由
+      /**判断路由离开页面时是否需要移除缓存**/
       if (deepOldRouter?.name) {
-        if (
-          deepOldRouter.meta?.leaveRmCachePage &&
-          deepOldRouter.meta?.cachePage
-        ) {
-          store.commit('app/M_DEL_CACHED_VIEW', deepOldRouter.name)
+        //页面离开时，如果有cachePage=true和leaveRmCachePage=true，则移除当前页面缓存    
+        if (deepOldRouter.meta?.leaveRmCachePage && deepOldRouter.meta?.cachePage) {
+          appStore.delCachedView(deepOldRouter.name)
+          //remove the deepOldRouter‘s children component
+          removeDeepChildren(deepOldRouter)
         }
       } else {
-        //否则走正常两级路由处理流程
         if (oldRoute?.name) {
+         //页面离开时，如果有cachePage=true和leaveRmCachePage=true，则移除当前页面缓存  
           if (oldRoute.meta?.leaveRmCachePage && oldRoute.meta?.cachePage) {
-            store.commit('app/M_DEL_CACHED_VIEW', oldRoute.name)
+           //移除缓存
+            appStore.delCachedView(oldRoute.name)
           }
         }
       }
-      //如果存在cachePage字段则缓存当前页面
+      /**判断路由进入页面时是否需要添加缓存**/
       if (route.name) {
+        //页面进入时如果有cachePage=true，则设置页面缓存
         if (route.meta?.cachePage) {
-          store.commit('app/M_ADD_CACHED_VIEW', route.name)
+          appStore.addCachedView(route.name)
         }
       }
       deepOldRouter = null
-    } else if (routerLevel === 3) {
-      //如果路由等级为3级处理流程
+    }
+    //三级路由处理
+    if (routerLevel === 3) {
       //三级时存储当前路由对象的上一级
       const parentRoute = route.matched[1]
+      /**判断路由离开页面时是否需要移除缓存**/
       //deepOldRouter不为空，且deepOldRouter不是当前路由的父对象，则需要清除deepOldRouter缓存
       //一般为三级路由跳转三级路由的情况
       if (deepOldRouter?.name && deepOldRouter.name !== parentRoute.name) {
-        if (
-          deepOldRouter.meta?.leaveRmCachePage &&
-          deepOldRouter.meta?.cachePage
-        ) {
-          store.commit('app/M_DEL_CACHED_VIEW', deepOldRouter.name)
+        if (deepOldRouter.meta?.leaveRmCachePage && deepOldRouter.meta?.cachePage) {
+          appStore.delCachedView(deepOldRouter.name)
+          //remove the deepOldRouter‘s children component
+          removeDeepChildren(deepOldRouter)
         }
       } else {
         //否则走正常两级路由处理流程
         if (oldRoute?.name) {
           if (oldRoute.meta?.leaveRmCachePage && oldRoute.meta?.cachePage) {
-            store.commit('app/M_DEL_CACHED_VIEW', oldRoute.name)
+            appStore.setCacheViewDeep(oldRoute.name)
           }
         }
       }
-
-      //缓存移除逻辑
-      if (route.name) {
-        if (route.meta?.cachePage) {
-          deepOldRouter = parentRoute
-          //取的是第二级的name和第三级的name进行缓存
-          store.commit('app/M_ADD_CACHED_VIEW', deepOldRouter.name)
-          store.commit('app/M_ADD_CACHED_VIEW_DEEP', route.name)
+      /**判断路由进入页面时是否需要添加缓存**/
+      //取的是第二级的name
+      if (parentRoute.name && parentRoute.meta?.cachePage) {
+        deepOldRouter = parentRoute
+        appStore.addCachedViewDeep(deepOldRouter.name)
+        if (route.name) {
+          if (route.meta?.cachePage) {
+            //第三级路由的页面进行缓存，通过route.name
+            appStore.addCachedViewDeep(route.name)
+          }
         }
       }
     }
-    //保存上一个路由信息（也就是当前页面的路由信息）
-    oldRoute = JSON.parse(
-      JSON.stringify({ name: route.name, meta: route.meta })
-    )
-    return route.path
+    //保存上一个路由信息（也就是当前离开页面的路由信息）
+    oldRoute = JSON.parse(JSON.stringify({ name: route.name, meta: route.meta }))
   },
-})
+  //首次进入页面监听就触发  
+  { immediate: true }
+)
+</script>
 ```
 
-> 目前仅支持 2 级和 3 级路由之间的页面缓存，和清楚缓存
 
-> 如果清楚缓存的页面中含有 children 页面缓存，children 页面也会一起清除
 
-#### 如何使用
-
-router/index.js
-
-使用方式和上面介绍的类似，此处不做多介绍
+## 三级路由页面缓存源码分析
 
 ```javascript
-      {
-        path: 'deep-router-keep-alive',
-        name: 'DeepRouterKeepAlive',
-        component: () => import('@/views/example/keep-alive/DeepRouterKeepAlive.vue'),
-        //注：移除父容器页面缓存会把子页面一起移除了
-        meta: { title: 'Deep KeepAlive', cachePage: true, leaveRmCachePage: false },
-        alwaysShow: true,
-        children: [
-          {
-            path: 'deep-children',
-            name: 'DeepChildren',
-            component: () => import('@/views/example/keep-alive/deep-children/DeepChildren.vue'),
-            meta: { title: 'DeepChildren', cachePage: true, leaveRmCachePage: true }
-          },
-          {
-            path: 'deep-children-sd',
-            name: 'DeepChildrenSd',
-            component: () => import('@/views/example/keep-alive/deep-children/DeepChildrenSd.vue'),
-            meta: { title: 'DeepChildrenSd', cachePage: true, leaveRmCachePage: false }
+<script setup>
+import { useAppStore } from '@/store/app'
+const appStore = useAppStore()
+const route = useRoute()
+const settings = computed(() => {
+  return appStore.settings
+})
+
+const key = computed(() => route.path)
+//cachedViews: Array<string>  存储页面name
+const cachedViews = computed(() => {
+  return appStore.cachedViews
+})
+
+let oldRoute = {}
+let deepOldRouter = null
+
+//移除当前页下的children缓存
+const removeDeepChildren = (deepOldRouter) => {
+  deepOldRouter.children?.forEach((fItem) => {
+    appStore.setCacheViewDeep(fItem.name)
+  })
+}
+
+// cachePage: true  ->页面初始化后缓存本页面
+// leaveRmCachePage: true -> 页面离开后或者关闭后， 移除本页面缓存 
+// leaveRmCachePage和cachePage来自于router里的配置，请看下面介绍
+
+//注：
+// appStore.cachedViews:控制二级路由缓存
+// appStore.cachedViewsDeep:控制三级路由缓存
+
+//代码原理：通过监听路由里的name。从而获取当前路由，根据路由配置信息里的cachePage和leaveRmCachePage决定是否需要缓存和移除缓存
+watch(
+  () => route.name,
+  () => {
+    //获取几级路由,如：routerLevel === 2 二级路由
+    const routerLevel = route.matched.length
+    //三级路由处理
+    if (routerLevel === 3) {
+      //三级时存储当前路由对象的上一级
+      const parentRoute = route.matched[1]
+      
+      /**判断路由离开页面时是否需要移除缓存**/
+      //deepOldRouter不为空，且deepOldRouter不是当前路由的父对象，则需要清除deepOldRouter缓存
+      //一般为三级路由跳转三级路由的情况
+      if (deepOldRouter?.name && deepOldRouter.name !== parentRoute.name) {
+        if (deepOldRouter.meta?.leaveRmCachePage && deepOldRouter.meta?.cachePage) {
+          appStore.delCachedView(deepOldRouter.name)
+          //remove the deepOldRouter‘s children component
+          removeDeepChildren(deepOldRouter)
+        }
+      } else {
+        //否则走正常两级路由处理流程
+        if (oldRoute?.name) {
+          if (oldRoute.meta?.leaveRmCachePage && oldRoute.meta?.cachePage) {
+            appStore.setCacheViewDeep(oldRoute.name)
           }
-        ]
+        }
       }
+      /**判断路由进入页面时是否需要添加缓存**/
+      //取的是第二级的name
+      if (parentRoute.name && parentRoute.meta?.cachePage) {
+        deepOldRouter = parentRoute
+        appStore.addCachedViewDeep(deepOldRouter.name)
+        if (route.name) {
+          if (route.meta?.cachePage) {
+            //第三级路由的页面进行缓存，通过route.name
+            appStore.addCachedViewDeep(route.name)
+          }
+        }
+      }
+    }
+    //保存上一个路由信息（也就是当前离开页面的路由信息）
+    oldRoute = JSON.parse(JSON.stringify({ name: route.name, meta: route.meta }))
+  },
+  //首次进入页面监听就触发  
+  { immediate: true }
+)
+</script>
 ```
 
-##### 注：缓存和 tab 没有关联，和路由配置有关联
+>目前仅支持2级和3级路由之间的页面缓存，清除缓存
+>
+>如果清楚缓存的页面中含有children页面缓存，children页面也会一起清除
+
+
+
+## 缓存组源码分析
+
+配置了缓存组，当前配置页面下的多级页面，会根据配置的信息进行缓存
+
+src/layout/app-main/index.vue
+
+```typescript
+//缓存组处理
+//当前跳转页如果不在缓存组中，则整个组的页面进行移除
+if (cacheGroup.length) {
+    if (!cacheGroup.includes(route.name)) {
+        cacheGroup.forEach((item) => {
+            basicStore.delCachedView(item)
+        })
+    }
+}
+//当路由中配置了 cacheGroup 则会根据配置的数组页面名进行缓存
+if (route.meta?.cacheGroup) {
+    cacheGroup = route.meta?.cacheGroup || []
+cacheGroup.forEach((fItem) => {
+    basicStore.addCachedView(fItem)
+})
+}
+```
+
+如何使用
+
+//src/router/modules/basic-demo.js
+
+```typescript
+    {
+      meta: { title: 'KeepAlive Group', cacheGroup: ['KeepAliveGroup', 'SecondChild', 'ThirdChild'] }
+    }
+```
+
+>通过在 meta中配置 cacheGroup
+
+[体验地址](https://github.jzfai.top/vue3-admin-template/#/basic-demo/keep-alive-group)
+
+
+
+## tab标签栏缓存
+
+##### 注：缓存和tab没有关联，和路由配置有关联
 
 架构为什么要这样设置呢？
 
-1.缓存和 tab 没有关联，更利于缓存的灵活配置。如：当我们在 settings.js 中设置**showTagsView**为 false 时，依然可以使用路由配置的**cachePage**或者**leaveRmCachePage**进行设置缓存，**TagsView**的显示和隐藏对缓存没有影响。
+1.缓存和tab没有关联，更利于缓存的灵活配置。如：当我们在settings.js中设置**showTagsView**为false时，依然可以使用路由配置的**cachePage**或者**leaveRmCachePage**进行设置缓存，**TagsView**的显示和隐藏对缓存没有影响。
 
 2.和路由配置有关联，更利于我们对缓存的使用。如，我们可以根据路由配置的**cachePage**或者**leaveRmCachePage**，实现进行页面是否缓存，和离开页面页面是否移除缓存的**组合式选择**。
 
 ![1644548683277](https://github.jzfai.top/file/vap-assets/1644548683277.png)
 
-##### 那么如果我想实现之前 tab 打开时，页面缓存，tab 关闭时，移除缓存的功能呢？
+
+
+##### 那么如果我想实现之前tab打开时，页面缓存，tab关闭时，移除缓存的功能呢？
 
 在想实现此功能页面的路由上设置
 
 ```javascript
 //如果配置了cachePage: true 则当前页面进入后，进行缓存。 默认是false
-//如果配置了closeTabRmCache：true 则当前页离开后，页面会被移除缓存。默认是false
-meta: { title: 'Keep-Alive', cachePage: true, closeTabRmCache: true }
+//closeTabRmCache：true 则当前页离开后，页面会被移除缓存。默认是false
+meta: { title: 'Tab KeepAlive', cachePage: true, closeTabRmCache: true }
 ```
 
-> cachePage: true, leaveRmCachePage: ture -> 进入时缓存，关闭时移除缓存
+>cachePage: true, closeTabRmCache: ture -> 进入时缓存，关闭时移除缓存

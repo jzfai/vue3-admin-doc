@@ -3,27 +3,24 @@
 我们主要介绍下：代码格式eslint+pretty，以及husky 使用
 
 eslint: 负责代码质量校验，如 不能写console.log，不能写alert等
+
 prettier：负责代码格式化
+
 husky：为git提供生命周期hook，如我们可以在提交代码前做一些校验工作
 
 ##### 有些人会问，eslint也可以做代码格式化啊，为什么要用prettier呢？
 
 eslint不同系统，不同编辑器，格式化的代码会有些不同。这就导致了不同人员之间代码协助时由于代码不同步，老是会有各种问题，如代码冲突等。而prettier就不会有这些问题
 
+## pretties集成讲解
 
+相关依赖
 
-## pretties集成
-
-安装依赖
-
-```shell
-pnpm add  prettier@2.2.1 -D
+```json
+pnpm  add  prettier@2.2.1 -D
 ```
 
-
-配置文件
-
-新建   .prettierrc
+配置文件  .prettierrc 说明
 
 ```javascript
 {
@@ -40,10 +37,10 @@ pnpm add  prettier@2.2.1 -D
 
 
 
-新建    .prettierignore
+pretties忽略文件   .prettierignore
 
 ```javascript
-.history
+.history 
 .idea
 node_modules
 # System
@@ -55,11 +52,9 @@ pnpm*
 .vscode
 ```
 
->注： .prettierignore 为prettier的忽略文件
+>pretties在格式化时会对上面目录忽略
 
-
-
-此时.prettier集成完成了
+此时prettier相关配置讲解完成
 
 
 
@@ -71,11 +66,84 @@ webstrom：  settings->搜索preitties设置-> 勾选on save , 然后保存即�
 
 
 
-## eslint集成
+配置prettier配置文件.prettierrc 说明
 
-https://eslint.bootcss.com/docs/user-guide/configuring
+```json
+{
+    //使用tab缩进，默认false
+    "useTabs": false,
+    // tab缩进大小,默认为2
+    "tabWidth": 2,
+    // 换行长度，默认80
+    "printWidth": 120,
+    // 字符串使用单引号
+    "singleQuote": true,
+    // 在对象或数组最后一个元素后面是否加逗号（在ES5中加尾逗号）
+    "trailingComma": "none",
+    // 对象中打印空格 默认true
+    // true: { foo: bar }
+    // false: {foo: bar}
+    "bracketSpacing": true,
+     // 每行末尾自动添加分号;false->不添加
+    "semi": false,
+     //解决格式化插件Prettier，格式化操作后，结束标签＞跑到下一行
+    "htmlWhitespaceSensitivity": "ignore"
+}
+```
 
-#### 安装依赖
+>vscode或webstrom设置保存时，自动格式化代码，且使用prettier方式 (不会请自行百度)
+>
+>设置后你会发现有不一样的开发体验
+
+附：pretties完整配置和字段说明
+
+```json
+     // 使能每一种语言默认格式化规则
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[less]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+   
+   /*  prettier的配置 */
+    "prettier.printWidth": 100, // 超过最大值换行
+    "prettier.tabWidth": 4, // 缩进字节数
+    "prettier.useTabs": false, // 缩进不使用tab，使用空格
+    "prettier.semi": true, // 句尾添加分号
+    "prettier.singleQuote": true, // 使用单引号代替双引号
+    "prettier.proseWrap": "preserve", // 默认值。因为使用了一些折行敏感型的渲染器（如GitHub comment）而按照markdown文本样式进行折行
+    "prettier.arrowParens": "avoid", //  (x) => {} 箭头函数参数只有一个时是否要有小括号。avoid：省略括号
+    "prettier.bracketSpacing": true, // 在对象，数组括号与文字之间加空格 "{ foo: bar }"
+    "prettier.disableLanguages": ["vue"], // 不格式化vue文件，vue文件的格式化单独设置
+    "prettier.endOfLine": "auto", // 结尾是 \n \r \n\r auto
+    "prettier.eslintIntegration": false, //不让prettier使用eslint的代码格式进行校验
+    "prettier.htmlWhitespaceSensitivity": "ignore",
+    "prettier.ignorePath": ".prettierignore", // 不使用prettier格式化的文件填写在项目的.prettierignore文件中
+    "prettier.jsxBracketSameLine": false, // 在jsx中把'>' 是否单独放一行
+    "prettier.jsxSingleQuote": false, // 在jsx中使用单引号代替双引号
+    "prettier.parser": "babylon", // 格式化的解析器，默认是babylon
+    "prettier.requireConfig": false, // Require a 'prettierconfig' to format prettier
+    "prettier.stylelintIntegration": false, //不让prettier使用stylelint的代码格式进行校验
+    "prettier.trailingComma": "es5", // 在对象或数组最后一个元素后面是否加逗号（在ES5中加尾逗号）
+    "prettier.tslintIntegration": false // 不让prettier使用tslint的代码格式进行校验
+```
+
+
+
+
+
+## eslint集成讲解
+
+[官方文档](https://eslint.bootcss.com/docs/user-guide/configuring)
+
+#### 相关依赖
 
 ```json
 "devDependencies": {
@@ -95,7 +163,6 @@ https://eslint.bootcss.com/docs/user-guide/configuring
     }
 ```
 
->运行 pnpm i  安装依赖即可
 >注：采用的是 element-plus 的部分eslint配置
 
 
@@ -119,11 +186,13 @@ eslint-plugin-jsonc：是针对JSON、JSONC和JSON5文件的ESLint插件。
 
 eslint-plugin-unicorn: 各种很棒的ESLint规则
 
-#### 配置
 
-新建eslint配置文件 .eslintrc.json
 
-```javascript
+## 配置说明
+
+eslint入口配置文件 .eslintrc.json
+
+```json
 {
   "root": true,
   "extends": ["./eslint-config.js"]
@@ -132,215 +201,45 @@ eslint-plugin-unicorn: 各种很棒的ESLint规则
 
 >注： .eslintrc.json eslint会自动读取
 
-新建  eslint-config.js
 
-eslint-config.js参考的是element-plus中的eslint配置
 
-```javascript
-// eslint-disable-next-line @typescript-eslint/no-var-requires
+eslint基础配置文件 eslint-config.js
+
+```json
 const { defineConfig } = require('eslint-define-config')
 module.exports = defineConfig({
-  env: {
-    es6: true,
-    browser: true,
-    node: true
-  },
+  //相关插件  
   plugins: ['@typescript-eslint', 'prettier', 'unicorn'],
+  //插件扩展  
   extends: [
-    'eslint:recommended',
-    'plugin:import/recommended',
-    'plugin:eslint-comments/recommended',
-    'plugin:jsonc/recommended-with-jsonc',
-    'plugin:markdown/recommended',
-    'plugin:vue/vue3-recommended',
-    'plugin:@typescript-eslint/recommended',
-    'prettier'
+     /**/
   ],
-  settings: {
-    'import/resolver': {
-      node: { extensions: ['.js', '.mjs', '.ts', '.d.ts', '.tsx'] }
-    }
-  },
   overrides: [
-    {
-      files: ['*.ts', '*.vue'],
-      rules: {
+    rules: {
         'no-undef': 'off',
-        '@typescript-eslint/ban-types': 'off'
-      }
-    },
-    {
-      files: ['*.js'],
-      rules: {
-        '@typescript-eslint/no-var-requires': 'off'
-      }
-    },
-    {
-      files: ['*.vue'],
-      parser: 'vue-eslint-parser',
-      parserOptions: {
-        parser: '@typescript-eslint/parser',
-        extraFileExtensions: ['.vue'],
-        ecmaVersion: 'latest',
-        ecmaFeatures: {
-          jsx: true
-        }
-      },
-      rules: {
-        'no-undef': 'off',
+         //定义变量未使用规则 
         '@typescript-eslint/no-unused-vars': 'off',
+         //函数为空规则 
         '@typescript-eslint/no-empty-function': 'off'
       }
     }
   ],
+  //设置eslint规则 
   rules: {
-    // js/ts
-    camelcase: ['error', { properties: 'never' }],
-    'no-console': ['warn', { allow: ['error'] }],
-    'no-debugger': 'warn',
-    'no-constant-condition': ['error', { checkLoops: false }],
-    'no-restricted-syntax': ['error', 'LabeledStatement', 'WithStatement'],
-    'no-return-await': 'error',
-    'no-var': 'error',
-    'no-empty': ['error', { allowEmptyCatch: true }],
-    'prefer-const': ['warn', { destructuring: 'all', ignoreReadBeforeAssign: true }],
-    'prefer-arrow-callback': ['error', { allowNamedFunctions: false, allowUnboundThis: true }],
-    'object-shorthand': ['error', 'always', { ignoreConstructors: false, avoidQuotes: true }],
-    'prefer-rest-params': 'error',
-    'prefer-spread': 'error',
-    'prefer-template': 'error',
-
-    'no-redeclare': 'off',
-    '@typescript-eslint/no-redeclare': 'error',
-
-    // best-practice
-    'array-callback-return': 'error',
-    'block-scoped-var': 'error',
-    'no-alert': 'warn',
-    'no-case-declarations': 'error',
-    'no-multi-str': 'error',
-    'no-with': 'error',
-    'no-void': 'error',
-
-    'sort-imports': [
-      'warn',
-      {
-        ignoreCase: false,
-        ignoreDeclarationSort: true,
-        ignoreMemberSort: false,
-        memberSyntaxSortOrder: ['none', 'all', 'multiple', 'single'],
-        allowSeparatedGroups: false
-      }
-    ],
-    // stylistic-issues
-    'prefer-exponentiation-operator': 'error',
-
-    // ts
-    '@typescript-eslint/explicit-module-boundary-types': 'off',
-    '@typescript-eslint/no-explicit-any': 'off',
-    '@typescript-eslint/no-non-null-assertion': 'off',
-    '@typescript-eslint/no-non-null-asserted-optional-chain': 'off',
-    '@typescript-eslint/consistent-type-imports': ['error', { disallowTypeAnnotations: false }],
-    '@typescript-eslint/ban-ts-comment': ['off', { 'ts-ignore': false }],
-    '@typescript-eslint/no-empty-function': 'off',
-    // vue
-    'vue/no-v-html': 'off',
-    'vue/require-default-prop': 'off',
-    'vue/require-explicit-emits': 'off',
-    'vue/multi-word-component-names': 'off',
-    'vue/prefer-import-from-vue': 'off',
-    'vue/no-v-text-v-html-on-component': 'off',
-    'vue/html-self-closing': [
-      'error',
-      {
-        html: {
-          void: 'always',
-          normal: 'always',
-          component: 'always'
-        },
-        svg: 'always',
-        math: 'always'
-      }
-    ],
-
-    // prettier
-    //fix lf error
-    'prettier/prettier': 'off',
-    // import
-    // 'import/first': 'error',
-    // 'import/no-duplicates': 'error',
-    // 'import/order': [
-    //   'error',
-    //   {
-    //     groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
-    //
-    //     pathGroups: [
-    //       {
-    //         pattern: 'vue',
-    //         group: 'external',
-    //         position: 'before'
-    //       }
-    //     ],
-    //     pathGroupsExcludedImportTypes: ['type']
-    //   }
-    // ],
-    'import/no-unresolved': 'off',
-    'import/namespace': 'off',
-    'import/default': 'off',
-    'import/no-named-as-default': 'off',
-    'import/no-named-as-default-member': 'off',
-    'import/named': 'off',
-
-    // eslint-plugin-eslint-comments
-    'eslint-comments/disable-enable-pair': ['error', { allowWholeFile: true }],
-
-    // unicorn
-    'unicorn/custom-error-definition': 'error',
-    'unicorn/error-message': 'error',
-    'unicorn/escape-case': 'error',
-    'unicorn/import-index': 'error',
-    'unicorn/new-for-builtins': 'error',
-    'unicorn/no-array-method-this-argument': 'error',
-    'unicorn/no-array-push-push': 'error',
-    'unicorn/no-console-spaces': 'error',
-    'unicorn/no-for-loop': 'error',
-    'unicorn/no-hex-escape': 'error',
-    'unicorn/no-instanceof-array': 'error',
-    'unicorn/no-invalid-remove-event-listener': 'error',
-    'unicorn/no-new-array': 'error',
-    'unicorn/no-new-buffer': 'error',
-    'unicorn/no-unsafe-regex': 'off',
-    'unicorn/number-literal-case': 'error',
-    'unicorn/prefer-array-find': 'error',
-    'unicorn/prefer-array-flat-map': 'error',
-    'unicorn/prefer-array-index-of': 'error',
-    'unicorn/prefer-array-some': 'error',
-    'unicorn/prefer-date-now': 'error',
-    'unicorn/prefer-dom-node-dataset': 'error',
-    'unicorn/prefer-includes': 'error',
-    'unicorn/prefer-keyboard-event-key': 'error',
-    'unicorn/prefer-math-trunc': 'error',
-    'unicorn/prefer-modern-dom-apis': 'error',
-    'unicorn/prefer-negative-index': 'error',
-    'unicorn/prefer-number-properties': 'error',
-    'unicorn/prefer-optional-catch-binding': 'error',
-    'unicorn/prefer-prototype-methods': 'error',
-    'unicorn/prefer-query-selector': 'error',
-    'unicorn/prefer-reflect-apply': 'error',
-    'unicorn/prefer-string-slice': 'error',
-    'unicorn/prefer-string-starts-ends-with': 'error',
-    'unicorn/prefer-string-trim-start-end': 'error',
-    'unicorn/prefer-type-error': 'error',
-    'unicorn/throw-new-error': 'error'
+     /**/
   }
 })
 ```
 
+>vscode或webstrom设置保存时，自动格式化代码，且使用prettier方式
+>
+>设置后你会发现有不一样的开发体验
 
 
-##### 新建eslint忽略文件.eslintignore
 
-```javascript
+## eslint忽略文件.eslintignore说明
+
+```json
 public
 node_modules
 .history
@@ -350,7 +249,6 @@ dist
 ```
 
 此时eslint集成完了，有可能你会遇到eslint报  **[ERR_REQUIRE_ESM]: require() of ES Module]**
-
 处理方法：
 
 ```json
@@ -362,9 +260,7 @@ dist
 
 移除后删除node_module，重新安装依赖即可，建议重启下编辑器
 
-
-
-##### 集成lint命令到package.json中
+#### 集成lint命令到package.json中
 
 ```json
 {
@@ -380,17 +276,17 @@ dist
 
 ## husky 集成
 
-git生命周期钩子
+> git生命周期钩子
 
-##### 安装依赖
 
-```shell
+
+### 依赖说明
+
+```json
 pnpm add husky@8.0.1 -D
 ```
 
-
-
-##### 配置
+### 配置说明
 
 在package.json的script中添加 **prepare** 命令
 
@@ -424,7 +320,6 @@ npm run lint
 
 
 
+## 总结
 
-
-源码或视频地址
-[eslint,husky,pretties集成源码]( https://gitee.com/jzfai/vue3-admin-learn-code.git)
+eslint+pretties+husky 能很大程度提升我们开发效率，和协作之间规范性。建议大家开启使用

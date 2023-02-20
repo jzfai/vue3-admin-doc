@@ -1,29 +1,6 @@
 # 前言
 
-人们常说磨刀不误砍柴工，本篇主要介绍用vscode和idea(webstrom)开发vue3-admin-plus时的配置，
-
-让我们开发的更爽
-
-## vscode
-
-安装插件
-
-```text
-eslint
-Prettier - Code formatter
-TypeScript Vue Plugin (Volar)
-```
-
-配置 Prettier为编辑器默认格式化
-
-
-![1644830462431](https://github.jzfai.top/file/vap-assets/1644830462431.png)
-
-![1644830464553](https://github.jzfai.top/file/vap-assets/1644830464553.png)
-
->配置完成后页面，在保存时，会自动格式化页面
-
-
+人们常说磨刀不误砍柴工，本篇主要介绍用idea(webstrom)配置和断点调试
 
 
 
@@ -61,7 +38,7 @@ settings-> 搜索eslint
 
 ## 配置保存策略，移除实时保存
 
-实时保存会造成电脑性能损耗过大，让后卡顿
+实时保存会造成电脑硬盘性能损耗过大，让后卡顿
 
 ##### 如何设置？
 
@@ -95,7 +72,7 @@ idea重启生效
 
 ##### 如何设置？
 
- “Editor”>>“General”>>“Editor Tabs”
+“Editor”>>“General”>>“Editor Tabs”
 
 勾选 Mark modifed(*) 选项
 
@@ -116,4 +93,34 @@ idea重启生效
 ![1669272218927](https://github.jzfai.top/file/vap-assets/1669272218927.png)
 
 此时右下角出现内存使用数字
+
+
+
+## webstrom 断点调试
+
+webstrom的断点调试较为简单
+
+#### 启动项目
+
+```
+npm run dev 
+```
+
+![1651887579536](https://github.jzfai.top/file/vap-assets/1651887579536.png)
+
+得到 "http://localhost:3001/" 访问链接
+
+#### 点击edit configurations
+
+![1651887837277](https://github.jzfai.top/file/vap-assets/1651887837277.png)
+
+##### 添加debug
+
+![1651887875228](https://github.jzfai.top/file/vap-assets/1651887875228.png)
+
+![1651887883486](https://github.jzfai.top/file/vap-assets/1651887883486.png)
+
+##### 运行调试按钮即可调试
+
+![1651887926820](https://github.jzfai.top/file/vap-assets/1651887926820.png)
 

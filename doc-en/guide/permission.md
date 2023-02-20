@@ -1,230 +1,242 @@
-# 登录和路由权限篇(提升篇)
+## 登录和路由权限篇(提升篇)
 
-来先贴上 vue3-admin-plus 登录流程图
+来先贴上vue3-admin-plus登录流程图
 
 ![1638344733744](https://github.jzfai.top/file/vap-assets/1638344733744.png)
 
 下面我们来详细说说
 
-login.vue 页面
+
+
+## 登录和权限逻辑
+
+login.vue页面
+
+src/views/login/index.vue
 
 ```javascript
 //点击登录按钮
 <el-button @click.prevent="handleLogin">Login</el-button>
 
-let loginReq = () => {
-  store
-     //具体流程看下面介绍的store/modules/user.js
-    .dispatch('user/login', formInline)
-    .then(() => {
-      /*
-      登录成功
-      * state.redirect->记录上次跳转到login页的path
-      * state.otherQuery->记录上次跳转到login页的参数
-        如果是刚进入login页面，redirect和otherQuery则为空
-      * */
-      proxy.$router.push({ path: state.redirect || '/', query: state.otherQuery })
-    })
-    .catch((res) => {
-      //提示错误信息
-      tipMessage.value = res.msg
+//登录
+const handleLogin = () => {
+  //检验输入用户名和密码的正确性  
+  refLoginForm.validate((valid) => {
+    subLoading = true
+    if (valid) loginFunc()
+  })
+}
+const loginFunc = () => {
+  //发送登录请求  
+  loginReq(subForm)
+    .then(({ data }) => {
+      elMessage('登录成功
+      //设置token到pinia中
+      basicStore.setToken(data?.jwtToken)
+      //跳转到首页                    
+      router.push('/')
     })
 }
-
+//src/api/user.js
+//登录api
+export const loginReq = (subForm) => {
+  return axiosReq({
+    url: '/basis-func/user/loginValid',
+    params: subForm,
+    method: 'post'
+  })
+}
 ```
 
-store/modules/user.js
+store/basic.js
 
 ```javascript
-//dispatch('user/login', formInline)
-//使用localStorage存储token
-import { setToken, removeToken } from '@/utils/auth
-login({ commit }, data) {
-    return new Promise((resolve, reject) => {
-      //发送登录请求
-      loginReq(data)
-        .then((res) => {
-          if (res.code === 20000) {
-            //将token存储在localStorage中
-            setToken(res.data?.jwtToken)
-            resolve()
-          } else {
-            reject(res)
-          }
-        })
-        .catch((error) => {
-          reject(error)
-        })
-    })
- },
+//持久化token 到 localStorage
+persist: {
+    storage: localStorage,
+    paths: ['token']
+}, 
+//设置token到pinia    
+actions: {
+    setToken(data) {
+      this.token = data
+    }
+}
 ```
 
 permission.js
 
 ```javascript
-//页面白名单
-const whiteList = ['/login']
-router.beforeEach(async (to, from, next) => {
-  // 开始页面动画
-  if (settings.isNeedNprogress) NProgress.start()
-  // 设置页面tital
-  document.title = getPageTitle(to.meta.title)
-  // 是否需要登录：是->获取token,否->设置一个临时的token
-  let hasToken = settings.isNeedLogin ? getToken() : 'temp_token'
-  if (hasToken) {
+//路由进入前拦截
+//to:将要进入的页面 vue-router4.0 不推荐使用next()
+const whiteList = ['/login', '/404', '/401'] // no redirect whitelist
+router.beforeEach(async (to) => {
+  progressStart()
+  //fix 初始化页面title为空  
+  document.title = langTitle(to.meta?.title) // i18 page title
+  const basicStore = useBasicStore()
+  //不需要登录时要走的逻辑
+  if (!settings.isNeedLogin) {
+    basicStore.setFilterAsyncRoutes([])
+    return true
+  }
+  //1.判断token
+  if (basicStore.token) {
     if (to.path === '/login') {
-      // 有token的情况下，如果去往的是“login”页面，设置访问首页
-      next({ path: '/' })
+      return '/'
     } else {
-      //是否获取过用户信息
-      let isGetUserInfo = store.state.permission.isGetUserInfo
-      if (isGetUserInfo) {
-        //获取过用户信息，说明动态路由，用户信息设置完毕，直接页面放行
-        next()
-      } else {
-        //未获取过用户信息，用户信息设置，动态路由筛选流程
+      //2.判断是否获取用户信息
+      if (!basicStore.getUserInfo) {
         try {
-          let accessRoutes = []
-          /*
-             是否需要登录：
-             是：走用户信息设置，动态路由筛选流程
-             否：动态路由不做筛选
-           * */
-          if (settings.isNeedLogin) {
-            //请求用户信息
-            const { roles } = await store.dispatch('user/getInfo')
-            //过滤动态路由，permission/generateRoutes流程下面详细介绍
-            accessRoutes = await store.dispatch(
-              'permission/generateRoutes',
-              roles
-            )
-            //静态路由和过滤后的动态路由设置到vuex中，给侧边栏sideBar显示使用
-            store.commit('permission/M_routes', accessRoutes)
-          } else {
-            accessRoutes = asyncRoutes
-            store.commit('permission/M_routes', accessRoutes)
-          }
-          //设置动态路由accessRoutes到vue-router
-          accessRoutes.forEach((route) => {
-            router.addRoute(route)
-          })
-          //获取用户信息状态完成，设置isGetUserInfo为true
-          store.commit('permission/M_isGetUserInfo', true)
-          // replace: true, 清空浏览器的历史记录
-          next({ ...to, replace: true })
-        } catch (err) {
-          //如果发生错误,则重置状态，重定向到登录页
-          await store.dispatch('user/resetToken')
-          next(`/login?redirect=${to.path}`)
-          if (settings.isNeedNprogress) NProgress.done()
+          const userData = await userInfoReq()
+          //3.动态路由权限筛选
+          filterAsyncRouter(userData)
+          //4.保存用户信息到store
+          basicStore.setUserInfo(userData)
+          //5.再次执行路由跳转
+          return { ...to, replace: true }
+        } catch (e) {
+          console.error(`route permission error${e}`)
+          //重置登录状态  
+          basicStore.resetState()
+          //关闭进度条  
+          progressClose()
+          //返回到login页面  
+          return `/login?redirect=${to.path}`
         }
+      } else {
+        //直接放行  
+        return true
       }
     }
   } else {
-    //白名单页面直接放行，否则重定向到登录页
-    if (whiteList.indexOf(to.path) !== -1) {
-      next()
+    //判断当前页面是否是白名单页面，不是返回到登录页  
+    if (!whiteList.includes(to.path)) {
+      return `/login?redirect=${to.path}`
     } else {
-      next(`/login?redirect=${to.path}`)
-      if (settings.isNeedNprogress) NProgress.done()
+      //直接放行  
+      return true
     }
   }
 })
+//路由进入后拦截
+router.afterEach(() => {
+  progressClose()
+})
 ```
 
-store/modules/permission.js
+## 菜单过滤
+
+主要分为按 角色，动态菜单,  权限code
+
+
+
+## 角色或权限code
 
 ```javascript
-//store.dispatch('permission/generateRoutes', roles)
-generateRoutes({ commit }, roles) {
-    return new Promise(async (resolve) => {
-      let accessedRoutes
-      //判断过滤动态路由的方式，roles还是codeArr
-      if (settings.permissionMode === 'roles') {
-        if (roles.includes('admin')) {
-           //如果角色是admin,最高权限不用过滤
-          accessedRoutes = asyncRoutes || []
-        } else {
-          //执行filterAsyncRoutes把asyncRoutes根据roles进行过滤，下面详解
-          accessedRoutes = filterAsyncRoutes(asyncRoutes, roles)
-        }
-      } else {
-        //获取codeArr数据，没有则设置为[1]
-        let codeArr = localStorage.getItem('codeArr')
-        if (codeArr) {
-          codeArr = JSON.parse(codeArr)
-        } else {
-          localStorage.setItem('codeArr', JSON.stringify([1]))
-          codeArr = localStorage.getItem('codeArr')
-        }
-        //执行filterRouterByCodeArr,把asyncRoutes根据codeArr进行过滤，下面详解
-        accessedRoutes = await filterRouterByCodeArr(codeArr, asyncRoutes)
-      }
-      //动态路由过滤完毕设置到vuex，方便后续使用
-      commit('M_routes', accessedRoutes)
-      //将过滤完毕的动态路由返回到permission.js
-      resolve(accessedRoutes)
-    })
-  }
-
+//src/hooks/use-permission.js
 /**
- * 通过角色过滤动态路由
- * @param routes 动态路由
- * @param roles 传入的角色数组
+ * 根据角色数组过滤异步路由
+ * @param routes asyncRoutes 未过滤的异步路由
+ * @param roles  角色数组
+ * return 过滤后的异步路由
  */
-export function filterAsyncRoutes(routes, roles) {
+export function filterAsyncRoutesByRoles(routes, roles) {
   const res = []
   routes.forEach((route) => {
     const tmp = { ...route }
+    //递归过滤动态路由  
     if (hasPermission(roles, tmp)) {
       if (tmp.children) {
-        //递归调用当前方法过滤children
-        tmp.children = filterAsyncRoutes(tmp.children, roles)
+        tmp.children = filterAsyncRoutesByRoles(tmp.children, roles)
       }
       res.push(tmp)
     }
   })
   return res
 }
-//判断roles中的角色，是否在route.meta.roles中包含，有则返回true
+//判断菜单中是否包含该角色权限如  当前角色为 admin , 那么路由中写了[editor,admin]具备该权限
 function hasPermission(roles, route) {
-  if (route.meta && route.meta.roles) {
-    return roles.some((role) => route.meta.roles.includes(role))
+  if (route?.meta?.roles) {
+    return roles?.some((role) => route.meta.roles.includes(role))
   } else {
     return true
   }
 }
-
-/**
- * 通过codeArr过滤动态路由，和上面类似这里不做介绍
- * @param codeArr
- * @param asyncRoutes
- */
-function filterRouterByCodeArr(codeArr, asyncRoutes) {
-  return new Promise((resolve) => {
-    let filterRouter = []
-    asyncRoutes.forEach(async (routeItem) => {
-      if (hasCodePermission(codeArr, routeItem)) {
-        if (routeItem.children) {
-          routeItem.children = await filterRouterByCodeArr(codeArr, routeItem.children)
-        }
-        filterRouter.push(routeItem)
-      }
-    })
-    resolve(filterRouter)
-  })
-}
-function hasCodePermission(codeArr, routeItem) {
-  if (routeItem.meta && routeItem.meta.code) {
-    //如果hidden为true,此路由不做过滤
-    return codeArr.includes(routeItem.meta.code) || routeItem.hidden
-  } else {
-    return true
-  }
-}
-
 ```
 
-总的来说，通过角色或者 codeArr，动态过滤动态路由 asyncRoutes。得到动态路由后，再调用 vue-router 的方法
+>注：权限code和角色差不多，具体大家可以自己看下源码
 
-router.addRoute(route) 设置路由，挂载到真正的 router 上
+
+
+## 动态菜单
+
+```typescript
+const buttonCodes = [] //按钮权限
+export const filterAsyncRoutesByMenuList = (menuList) => {
+  const filterRouter = []
+  //根据获取的菜单数据递归生成菜单
+  menuList.forEach((route) => {
+    if (route.category === 3) {
+      //category为3，收集按钮权限  
+      buttonCodes.push(route.code)
+    } else {
+      //递归生成菜单
+      const itemFromReqRouter = getRouteItemFromReqRouter(route)
+      if (route.children?.length) {
+        itemFromReqRouter.children = filterAsyncRoutesByMenuList(route.children)
+      }
+      filterRouter.push(itemFromReqRouter)
+    }
+  })
+  return filterRouter
+}
+const getRouteItemFromReqRouter = (route) => {
+  const tmp = { meta: { title: '' } }
+  //route项中需要生成的key
+  const routeKeyArr = ['path', 'component', 'redirect', 'alwaysShow', 'name', 'hidden']
+  //meta中需要生成的key
+  const metaKeyArr = ['title', 'activeMenu', 'elSvgIcon', 'icon']
+  //动态拼接路由 必须要用 import.meta.glob， 使用()=>import("xxx")报错
+  const modules = import.meta.glob('../views/**/**.vue')
+  //生成router key项  
+  routeKeyArr.forEach((fItem) => {
+    if (fItem === 'component') {
+      if (route[fItem] === 'Layout') {
+        tmp[fItem] = Layout
+      } else {
+        //has error , i will fix it through plugins
+        //tmp[fItem] = () => import(`@/views/permission-center/test/TestTableQuery.vue`)
+        tmp[fItem] = modules[`../views/${route[fItem]}`]
+      }
+    } else if (fItem === 'path' && route.parentId === 0) {
+      tmp[fItem] = `/${route[fItem]}`
+    } else if (['hidden', 'alwaysShow'].includes(fItem)) {
+      tmp[fItem] = !!route[fItem]
+    } else if (['name'].includes(fItem)) {
+      tmp[fItem] = route['code']
+    } else if (route[fItem]) {
+      tmp[fItem] = route[fItem]
+    }
+  })
+  //生成 metaKey 项
+  metaKeyArr.forEach((fItem) => {
+    if (route[fItem] && tmp.meta) tmp.meta[fItem] = route[fItem]
+  })
+  //生成 metaKey 项（额外的）
+  if (route.extra) {
+    Object.entries(route.extra.parse(route.extra)).forEach(([key, value]) => {
+      if (key === 'meta' && tmp.meta) {
+        tmp.meta[key] = value
+      } else {
+        tmp[key] = value
+      }
+    })
+  }
+  return tmp
+}
+```
+
+总的来说，通过角色或者codeArr，动态过滤动态路由asyncRoutes。得到动态路由后，再调用vue-router的方法
+
+router.addRoute(route) 设置路由，挂载到真正的router上

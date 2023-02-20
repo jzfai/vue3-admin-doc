@@ -16,7 +16,6 @@ vue3-admin系列主要分为 vue3-admin-template, vue3-admin-ts ,vue3-admin-plus
 **本视频课程覆盖了未来1-5年内前端最新的知识点**
 
 
-
 ## 总览 {#overview}
 
 - 本架构使用的技术为：vue3(setup-script)+vite2+element-plus

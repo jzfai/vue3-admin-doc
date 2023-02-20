@@ -6,6 +6,7 @@ const ogDescription = 'Next Generation Admin Construct'
 // const ogImage = 'https://vitejs.dev/og-image.png'
 const ogTitle = 'vue3-admin-plus'
 const ogUrl = 'https://vitejs.dev'
+
 export default defineConfig({
   title: 'vue3-admin-plus',
   description: '下一代前端工具链',
@@ -41,10 +42,11 @@ export default defineConfig({
         facetFilters: ['tags:cn']
       }
     },
+    // @ts-ignore
     localeLinks: {
       text: '简体中文',
       items: [
-        { text: 'English', link: 'https://github.jzfai.top/vue3-admin-en-doc' },
+        { text: 'English', link: 'https://github.jzfai.top/vue3-admin-doc' },
         // { text: '日本語', link: 'https://ja.vitejs.dev' },
         // { text: 'Español', link: 'https://es.vitejs.dev' }
       ]
@@ -74,8 +76,12 @@ export default defineConfig({
               link: '/guide/eslint-prettier'
             },
             {
-              text: 'vscode和idea推荐配置',
-              link: '/guide/vscode-idea-setting'
+              text: 'vscode推荐配置',
+              link: '/guide/vscode-setting'
+            },
+            {
+              text: 'idea或webstrom推荐配置',
+              link: '/guide/idea-webstrom-setting'
             },
           ]
         },
@@ -108,7 +114,7 @@ export default defineConfig({
               link: '/guide/mock'
             },
             {
-              text: '全局错误日志收集(待更新) ',
+              text: '全局错误日志收集 ',
               link: '/guide/error-collection'
             }
           ]
@@ -117,22 +123,34 @@ export default defineConfig({
           text: '进阶',
           items: [
             {
-              text: '登录和路由权限篇(待更新)',
+              text: '登录和路由权限篇',
               link: '/guide/permission'
             },
             {
-              text: 'keep-alive缓存篇(待更新)',
+              text: 'keep-alive缓存篇(基础)',
+              link: '/guide/keep-alive-basic'
+            },
+            {
+              text: 'keep-alive缓存篇',
               link: '/guide/keep-alive'
             },
             {
-              text: 'i18n国际化语言(待更新)',
+              text: '国际化语言',
               link: '/guide/i18n'
-            }
+            },
+            {
+              text: '主题色',
+              link: '/guide/theme-setting'
+            },
           ]
         },
         {
           text: '其他',
           items: [
+            {
+              text: 'vue3基础及vue2转vue3',
+              link: '/guide/vue2-vue3-fast'
+            },
             {
               text: 'reactive和ref',
               link: '/guide/ref-reactive'
