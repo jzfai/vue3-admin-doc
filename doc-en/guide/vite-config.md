@@ -21,7 +21,7 @@ INFO  Starting development server...
 
  DONE  Compiled successfully in 13637ms                                                                                                                           下午5:47:26
   App running at:
-  - Local:   http://localhost:9527/
+  - Local:   localhost:9527/
   - Network: http://10.39.178.135:9527/
 
   Note that the development build is not optimized.
@@ -33,7 +33,7 @@ INFO  Starting development server...
   > Network:  http://10.39.178.135:5001/vue3-admin-plus/
   > Network:  http://11.0.0.1:5001/vue3-admin-plus/
   > Network:  http://10.38.178.208:5001/vue3-admin-plus/
-  > Local:    http://localhost:5001/vue3-admin-plus/
+  > Local:    localhost:5001/vue3-admin-plus/
 
   ready in 1301ms.
 ```

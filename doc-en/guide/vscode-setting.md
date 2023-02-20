@@ -39,7 +39,7 @@ TypeScript Vue Plugin (Volar)
        "type":"pwa-chrome",
        "request": "launch",
        "name":"vue3-vite-base",
-       "url": "http://localhost:3000",
+       "url": "localhost:3000",
        "webRoot": "${workspaceFolder}"
     }
   ]
