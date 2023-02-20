@@ -108,7 +108,7 @@ npm run dev
 
 ![1651887579536](https://github.jzfai.top/file/vap-assets/1651887579536.png)
 
-得到 ""http://localhost:3001"/ 访问链接
+得到 ""localhost:3001"/ 访问链接
 
 #### 点击edit configurations
 

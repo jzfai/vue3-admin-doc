@@ -44,7 +44,7 @@ proxy: {
 ##### 说明:
 
 ```javascript
-请求拦截的前缀如请求地址中 http://localhost:5001/api
+请求拦截的前缀如请求地址中 "http://localhost:5001/api"
 注意：请求域名必须为http://localhost:5001/才会进行拦截(你本地访问页面的起始地址)，  如https://github.jzfai.top/api则不会进行拦截，所以需要配置跨域的话建议把url写成：/api就行
 如在 .env.serve-dev文件中设置VITE_APP_BASE_URL = '/api'
 ```

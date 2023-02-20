@@ -29,23 +29,23 @@ proxy 跨域配置
 proxy: {
   1.如发送请求/api/xxx,此时请求拦/api
   '/api': {
-    2.路径转发，此时请求地址变为"http://localhost:5001/api/xxxx"
-    target: 'http://localhost:5001',
+    2.路径转发，此时请求地址变为 localhost:5001/api/xxxx
+    target: localhost:5001,
     changeOrigin: true,//请求改变源，此时nginx可以获取到真实的请求ip
-    3.路径重写,此时请求变成了http://localhost:5001/xxxx,
+    3.路径重写,此时请求变成了 localhost:5001/xxxx,
     path.replace(/^/api/, ‘’)-->将请求地址中的api去除了
     rewrite: (path) => path.replace(/^/api/, ‘’)
   }
 }
 ```
 
-最终转发后的地址：""http://localhost:5001/api/xxxx"  ->   "http://localhost:5001/xxxx"
+最终转发后的地址：localhost:5001/api/xxxx  ->   localhost:5001/xxxx
 
 ##### 说明:
 
 ```javascript
-请求拦截的前缀如请求地址中 http://localhost:5001/api
-注意：请求域名必须为http://localhost:5001/才会进行拦截(你本地访问页面的起始地址)，  如https://github.jzfai.top/api则不会进行拦截，所以需要配置跨域的话建议把url写成：/api就行
+请求拦截的前缀如请求地址中 localhost:5001/api
+注意：请求域名必须为localhost:5001/才会进行拦截(你本地访问页面的起始地址)，  如https://github.jzfai.top/api则不会进行拦截，所以需要配置跨域的话建议把url写成：/api就行
 如在 .env.serve-dev文件中设置VITE_APP_BASE_URL = '/api'
 ```
 
