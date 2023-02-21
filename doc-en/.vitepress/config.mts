@@ -8,7 +8,7 @@ const ogTitle = 'vue3-admin-plus'
 const ogUrl = 'https://vitejs.dev'
 export default defineConfig({
   title: 'vue3-admin-plus',
-  description: 'The next generation solution of front',
+  description: 'The next generation solution for front',
   base: '/vue3-admin-doc',
   lang: 'zh-CN',
   head: [
@@ -58,102 +58,102 @@ export default defineConfig({
     sidebar: {
       '/guide/': [
         {
-          text: '指引',
+          text: 'GUIDE',
           items: [
             {
-              text: '前言',
+              text: 'Why Vue3-admin-plus',
               link: '/guide/why'
             },
             {
-              text: '开始',
+              text: 'Try It Out',
               link: '/guide/'
             },
             {
-              text: 'prettier,eslint和husk',
+              text: 'Prettier,Eslint,Husk',
               link: '/guide/eslint-prettier'
             },
             {
-              text: 'vscode推荐配置',
+              text: 'VSCode Config',
               link: '/guide/vscode-setting'
             },
             {
-              text: 'idea或webstrom推荐配置',
+              text: 'IDEA/WebStorm Config',
               link: '/guide/idea-webstrom-setting'
             },
           ]
         },
         {
-          text: '基础',
+          text: 'BASE',
           items: [
             {
-              text: '目录结构介绍',
+              text: 'Dirs Introduction',
               link: '/guide/dir-instruct'
             },
             {
-              text: '多环境设置',
+              text: 'Env Config',
               link: '/guide/env-setting'
             },
             {
-              text: '配置(settings.js)',
+              text: 'About Setting.js',
               link: '/guide/setting'
             },
             {
-              text: 'axios使用及取消请求',
+              text: 'Use Axios',
               link: '/guide/axios-req'
             },
             {
-              text: 'vite.config.js配置',
+              text: 'Vite.config.js',
               link: '/guide/vite-config'
             },
 
             {
-              text: 'mock篇',
+              text: 'Use Mock',
               link: '/guide/mock'
             },
             {
-              text: '全局错误日志收集 ',
+              text: 'Error Collection ',
               link: '/guide/error-collection'
             }
           ]
         },
         {
-          text: '进阶',
+          text: 'ADVANCE',
           items: [
             {
-              text: '登录和路由权限篇',
+              text: 'Login And Permission',
               link: '/guide/permission'
             },
             {
-              text: 'keep-alive缓存篇(基础)',
+              text: 'Keep-alive Cache(Basic)',
               link: '/guide/keep-alive-basic'
             },
             {
-              text: 'keep-alive缓存篇',
+              text: 'Keep-alive Cache',
               link: '/guide/keep-alive'
             },
             {
-              text: '国际化语言',
+              text: 'I18n',
               link: '/guide/i18n'
             },
             {
-              text: '主题色',
+              text: 'Theme Color',
               link: '/guide/theme-setting'
             },
           ]
         },
         {
-          text: '其他',
+          text: 'OTHERS',
           items: [
             {
-              text: 'vue3基础及vue2转vue3',
+              text: 'Vue2 To Vue3',
               link: '/guide/vue2-vue3-fast'
             },
             {
-              text: 'reactive和ref',
+              text: 'Reactive/Ref',
               link: '/guide/ref-reactive'
             },
             {
-              text: '如何解决跨域',
+              text: 'About CORS',
               link: '/guide/cors'
             }
           ]

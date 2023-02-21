@@ -2,11 +2,11 @@
 layout: home
 
 title: vue3-admin-plus
-titleTemplate: The next generation solution of front
+titleTemplate: The next generation solution for front
 
 hero:
   name: vue3-admin-plus
-  text: The next generation solution of front
+  text: The next generation solution for front
   tagline: Efficient framework for PC developers
   image:
     src: /logo-with-shadow.png

@@ -1,26 +1,26 @@
-# 前言
+# Introduction
 
-我们主要介绍下：代码格式eslint+pretty，以及husky 使用
+In this section, we will mainly introduce the use of ESLint and Prettier for code formatting, as well as the use of Husky.
 
-eslint: 负责代码质量校验，如 不能写console.log，不能写alert等
+ESLint: responsible for code quality checks, such as disallowing the use of console.log and alert.
 
-prettier：负责代码格式化
+Prettier: responsible for code formatting.
 
-husky：为git提供生命周期hook，如我们可以在提交代码前做一些校验工作
+Husky: provides lifecycle hooks for Git, allowing us to perform some validation work before committing code.
 
-##### 有些人会问，eslint也可以做代码格式化啊，为什么要用prettier呢？
+##### Some may wonder, since ESLint can also be used for code formatting, why do we need Prettier?
 
-eslint不同系统，不同编辑器，格式化的代码会有些不同。这就导致了不同人员之间代码协助时由于代码不同步，老是会有各种问题，如代码冲突等。而prettier就不会有这些问题
+The formatted code by ESLint may be different on different systems and editors. This leads to synchronization problems when collaborating on code with different people, resulting in issues such as code conflicts. Prettier can solve this problem.
 
-## pretties集成讲解
+## Prettier Integration
 
-相关依赖
+Related dependencies:
 
 ```json
 pnpm  add  prettier@2.2.1 -D
 ```
 
-配置文件  .prettierrc 说明
+Explanation of the configuration file .prettierrc:
 
 ```javascript
 {

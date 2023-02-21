@@ -40,67 +40,68 @@ Note: Vue3 could not run with IE.
 [For China Mainland](https://github.jzfai.top/vue3-admin-plus)
 
 
-## 搭建第一个 vue3-admin-plus 项目 {#scaffolding-your-first-vite-project}
+## Building Your First vue3-admin-plus Project {#scaffolding-your-first-vite-project}
 
-::: tip 兼容性注意
-vue3-admin-plus 需要 [Node.js](https://nodejs.org/en/) 版本 14.18+，16+。然而，有些模板需要依赖更高的 Node 版本才能正常运行，当你的包管理器发出警告时，请注意升级你的 Node 版本。
+::: tip Compatibility Notice
+vue3-admin-plus requires [Node.js](https://nodejs.org/en/) version 14.18+ or 16+. However, some templates may require higher versions of Node to function properly. When your package manager issues a warning, please pay attention to upgrading your Node version.
 :::
 
-::: tip 包构建工具注意
-vue3-admin-plus 推荐使用pnpm进行构建，如果您没有pnpm，可以运行命令 **npm -g i pnpm@7.9.0** 安装pnpm
+::: tip Package Manager Notice
+vue3-admin-plus recommends using pnpm for package management. If you don't have pnpm installed, you can run the command  **npm -g i pnpm@7.9.0** to install pnpm.
+
 :::
 
 
-使用 PNPM:
+Using PNPM:
 
 ```bash
-# 克隆项目
+# Clone the project
 git clone https://github.com/jzfai/vue3-admin-plus.git
 
-# 进入项目目录
+# Enter the project directory
 cd  vue3-admin-plus
 
-# 安装依赖(建议用pnpm)
-# 没有pnpm，运行" npm -g i pnpm@7.9.0" 
+# Install dependencies (use pnpm recommended)
+# If you don't have pnpm installed, run "npm -g i pnpm@7.9.0" 
 pnpm i
 
-# 启动服务
+# Start the service
 pnpm run dev
 ```
-然后按照提示操作即可！
+Then follow the prompts to complete the setup!
 
 
 
-## 命令行界面 {#command-line-interface}
+## Command Line Interface {#command-line-interface}
 
-在安装了 vue3-admin-plus 的项目后，可以在 npm scripts 中 运行 npm run dev 运行查看项目效果
+After installing vue3-admin-plus, you can run npm run dev in npm scripts to view the project.
 
 <!-- prettier-ignore -->
 ```json
 {
-    "scripts": {
-        "dev": "vite --mode serve-dev", //运行dev环境
-        "test": "vite --mode serve-test", //运行test环境
-        "build:test": "vite build --mode  build-test", //构建test环境
-        "build": "vite build --mode build", //构建生产环境
-        "preview:build": "npm run build && vite preview ", //发布前构建和预览
-        "preview": "vite preview ", //发布前预览
-        "lint": "eslint --ext .js,.jsx,.vue,.ts,.tsx src --fix", //eslint格式化
-        "prepare": "husky install", //安装githook钩子
-        "test:unit": "vue-cli-service test:unit", //运行单元测试
-        "test:watchAll": "vue-cli-service test:unit --watchAll", //运行单元测试且监听文件修改
-        "test:cov": "vue-cli-service test:unit --coverage",  //运行单元测试且生成覆盖率
-        "test:majestic": "majestic", // 查看单元测试覆盖率
-        "vitest": "vitest --ui", // 启动单元测试ui界面
-        "tsc-check": "tsc", // 启动单元测试ui界面
-        "coverage": "vitest run --coverage" // 查看单元测试覆盖率
-    }
+  "scripts": {
+    "dev": "vite --mode serve-dev", // run dev environment
+    "test": "vite --mode serve-test", // run test environment
+    "build:test": "vite build --mode  build-test", // build test environment
+    "build": "vite build --mode build", // build production environment
+    "preview:build": "npm run build && vite preview ", // build and preview before release
+    "preview": "vite preview ", // preview before release
+    "lint": "eslint --ext .js,.jsx,.vue,.ts,.tsx src --fix", // eslint formatting
+    "prepare": "husky install", // install git hook
+    "test:unit": "vue-cli-service test:unit", // run unit tests
+    "test:watchAll": "vue-cli-service test:unit --watchAll", // run unit tests and watch file changes
+    "test:cov": "vue-cli-service test:unit --coverage", // run unit tests and generate coverage
+    "test:majestic": "majestic", // view unit test coverage
+    "vitest": "vitest --ui", // start the unit test ui interface
+    "tsc-check": "tsc", // start tsc type check
+    "coverage": "vitest run --coverage" // view unit test coverage
+  }
 }
 ```
 
-可以指定额外的命令行选项，如 `--port` 或 `--https`。运行 `npx vite --help` 获得完整的命令行选项列表。
+You can specify additional command line options, such as --port or --https. Run npx vite --help for a complete list of command line options.
 
 
-## 社区 {#community}
+## Community {#community}
 
-如果你有疑问或者需要帮助，可以加入微信群 [WX-Group](https://github.jzfai.top/file/images/wx-groud.png) 和 [GitHub Discussions](https://github.com/vitejs/vite/discussions) 社区来寻求帮助。
+If you have any questions or need help, you can join the WeChat group [WX-Group](https://github.jzfai.top/file/images/wx-groud.png) or the [GitHub Discussions](https://github.com/vitejs/vite/discussions) community for help.

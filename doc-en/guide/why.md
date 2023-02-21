@@ -18,9 +18,9 @@ vue3-admin-plus effectively solves the above problems.
 
 ## Vite3 VS Webpack
 
-这里以[vue3-element-plus](https://github.com/jzfai/vue3-admin-plus.git)和[vue-element-admin]( https://github.com/PanJiaChen/vue-element-admin.git)在运行，打包和构建后大小进行对比
+Compare [vue3-element-plus](https://github.com/jzfai/vue3-admin-plus.git) and [vue-element-admin]( https://github.com/PanJiaChen/vue-element-admin.git).The differences are listed below
 
-##### 首次运行速度(npm run dev)
+##### Speed of first running(npm run dev)
 
 ```javascript
 // vue-element-admin 
@@ -42,21 +42,21 @@ INFO  Starting development server...
   ready in 1301ms.
 ```
 
-首次运行速度对比：
+Result：
 
 vue-element-admin ：13637ms     
 vue3-admin-plus：1301ms
 
 
 
-构建速度
+Result of building:
 
 vue-element-admin ：30s     
 vue3-admin-plus：51s 
 
 
 
-构建后包体积大小对比
+Building production size
 
 vue-element-admin ：6.13 MB
 
@@ -64,50 +64,50 @@ vue3-admin-plus：2.64 MB
 
 
 
-vite 在开发时运行速度快，在大型项目时也不会显得太重。webpack在打包时比vite稍快，在构建方面：包大小vue3比vue2少了将近 41% 。
+Vite is fast in development and not too heavy in large projects. webpack is slightly faster than vite in packaging and in building: package size vue3 is almost 41% less than vue2.
 
 
 
-总的来说：vite开发时运行速度超快，其实这正是是我们需要的。但是打包确实慢些，我们打包一天最多就那么几次，可以接受。
+Overall: vite runs super fast when developing, which is exactly what we need. But the packaging is really slow, and we pack at most a few times a day, which is acceptable.
 
 
 
-## 设计上更加合理
+## More rational in design
 
-vue3-admin-plus 设计参考 [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin.git) 使用习惯，可以说是vue-element-admin的vue3版本，但也可以说不是
+vue3-admin-plus design reference [vue-element-admin](https://github.com/PanJiaChen/vue-element-admin.git) usage habits, can be said to be the vue3 version of vue-element-admin, but can also be said is not
 
-为什么呢？
+Why?
 
-- vue3-admin-plus在保持原有的功能上进行了加强，代码逻辑和使用上变得更加合理和简单
+- vue3-admin-plus has been enhanced to maintain the original functionality, and the code logic and use has become more reasonable and simple
 
-- 代码规范上使用eslint+typescript+husk，提升团队之间代码规范性，团队合作更加高效
+- Code specification using eslint+typescript+husk to improve code specification between teams and make teamwork more efficient
 
-- 在主题色，国际化语言，layout布局，keep-alive缓存，路由权限等核心基础功能方面都做了重写和加强
+- In the theme color, internationalization language, layout layout, keep-alive cache, routing permissions and other core basic features have been rewritten and enhanced
 
 
 
-## 构建包更小，首次进入页面更快 
+## Smaller build packages and faster to load first page
 
-经过多次测试，构建后的包大小 **2m** 左右，首次进入页面时间为 **500ms** 左右
+After several tests, the built package size is **2m** and the first time to page time is **500ms**.
 ![template-speed-analysis](https://p3-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/fa07ebf2dcb34b059f1945c009752a52~tplv-k3u1fbpfcp-zoom-1.image)
 
 
 
-## vue3全家桶技术
+## All Stra Of Vue3
 
-- 基础构建： vue3+vite3
-- ui库：    element-plus
-- 路由：    vue-router4
-- 状态管理： pinia(vuex5)
-- 相关插件： unoscc, vite-plugin-mkcert, unplugin-auto-import,unplugin-vue-define-options 等
+- Base： vue3+vite3
+- UI：    element-plus
+- Router Module：    vue-router4
+- States： pinia(vuex5)
+- Plugins： unoscc, vite-plugin-mkcert, unplugin-auto-import,unplugin-vue-define-options and more
 
 
 
-## 常用功能及使用例子
+## Common functions and usage examples
 
-- rabc路由权限控制，keep-alive缓存，主题色，国际化语言，layout布局，size切换; 
+- rabc permission，keep-alive cache，theme color，I18n，layout，size controller; 
 
-- vue3,hook,mock等基础使用例子
+- vue3,hook,mock and other examples
 
-- 面向vue3-admin-plus前端低代码平台等
+- For vue3-admin-plus low-code platform
 
