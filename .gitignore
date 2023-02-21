@@ -40,6 +40,7 @@ lerna-debug.log*
 
 # Other
 .history
+*/.vitepress/cache/
 *.local
 yarn*
 pnpm*
