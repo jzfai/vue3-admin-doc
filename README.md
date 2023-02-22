@@ -7,7 +7,7 @@ suggestion the Node.js >= 16.0.0。
 
 ## Online experience
 
-- [English](https://github.jzfai.top/vue3-admin-en-doc/)
+- [English](https://github.jzfai.top/vue3-admin-doc/)
 
 - [中文官网](https://github.jzfai.top/vue3-admin-cn-doc/)
 
