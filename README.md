@@ -28,7 +28,7 @@ pnpm i
 
 # develop
 pnpm run dev:en #en
-pnpm run dev:zh #zh
+pnpm run dev:cn #cn
 ```
 
 
