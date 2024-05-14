@@ -1,123 +1,121 @@
-# 前言
+# Introduction
 
-本篇主要针对配置文件settings.js进行讲解
+This article primarily explains the configuration file `settings.js`.
 
-## 配置文件settings.js
+## Configuration File settings.js
 
-settings.js主要分为三部分配置
+`settings.js` mainly consists of three parts of configuration:
 
-- 页面布局相关
-- 页面动画相关
-- 页面登录和其他
+- Page layout related
+- Page animation related
+- Page login and others
 
-我们先熟悉vue3-element-plus页面布局，来张图
+Let's first familiarize ourselves with the Vue3-Element-Plus page layout with the help of an image:
 
 ![1639477384677](https://github.jzfai.top/file/vap-assets/1639477384677.png)
 
-下面详解，配合上面的图
+Below is a detailed explanation, complemented by the image above.
 
-src/settings.js
+**src/settings.js**
 
 ```javascript
 const setting = {
-  /*页面布局相关*/
-  //标题和导航栏显示的名称
+  /* Page layout related */
+  // Title displayed in the title bar and navigation bar
   title: 'Vue3 Admin Plus',
-  //是否显示图标和标题（Logo）
+  // Whether to display the logo and title (Logo)
   sidebarLogo: true,
-  //是否导航栏的中间的title
+  // Whether to display the title in the center of the navigation bar
   showNavbarTitle: false,
-  //是否显示下拉框区域
+  // Whether to show the dropdown area
   ShowDropDown: true,
-  //是否显示面包屑导航（Breadcrumb）
+  // Whether to display the breadcrumb navigation
   showHamburger: true,
-  //是否显示侧边栏（Sidebar）
+  // Whether to display the sidebar
   showLeftMenu: true,
-  //是否显示标签栏（TagsView）
+  // Whether to display the tags view
   showTagsView: true,
-  //显示标签栏时，配置最多显示标签的个数，超过将会替换最后一个标签
+  // Maximum number of tags to display when the tags view is shown; exceeding this will replace the last tag
   tagsViewNum: 6,
-  //是否显示导航栏（NavBar）
+  // Whether to display the navigation bar
   showTopNavbar: true,
   
-  /*页面动画相关*/
-  //主视区域和面包屑导航是否需要动画
+  /* Page animation related */
+  // Whether animation is required for the main view area and breadcrumb navigation
   mainNeedAnimation: true,
-  //是否需要页面加载进度条
+  // Whether the page loading progress bar is needed
   isNeedNprogress: true,
   
-   
   /*
-    首次进入是否需要登录
-    true: 走正常的登录流程，包括角色权限的校验
-    false:不走登录流程，直接进入主页，此时没有token。架构中会在permission.js文件中，
-    动态设置个临时token使用，临时token取的是settings.js文件中的tmpToken
-    dev环境时，设置为false，可以适当提高你的开发效率
+    Whether login is required on first entry
+    true: Follow the normal login process, including role permission validation
+    false: Bypass the login process and directly enter the homepage; there is no token at this time. In the architecture, a temporary token will be dynamically set in permission.js,
+    which is obtained from the tmpToken in the settings.js file
+    Set to false in the dev environment to improve development efficiency
    */
   isNeedLogin: true,
   
-  // 当isNeedLogin设置为false起作用，建议调试时的token写在这里，架构会自动设置到auth.js中，
-  // 和登录流程设置的token一样
-  tmpToken: 'tmp_token'
+  // When isNeedLogin is set to false, this token is effective. It's recommended to place the debug token here, which will be automatically set to auth.js by the architecture,
+  // similar to the token set in the login process
+  tmpToken: 'tmp_token',
   
   /*
-    动态路由过滤的方式 'roles' | 'code' | 'rbac'
-    roles: 通过角色进行过滤
-    code:  通过codeArr进行过滤
-    rbac:  动态生成菜单列表
+    Dynamic routing filter mode 'roles' | 'code' | 'rbac'
+    roles: Filter by role
+    code: Filter by codeArr
+    rbac: Generate menu list dynamically
    */
   permissionMode: 'roles',
   
-    
-  //是否开启生产时也使用mock,开启后生产环境也能使用开发时的mock数据
+  // Whether to enable mock even in production, enabling mock data usage in the production environment
   openProdMock: true,
   
   /*
-    配置那个环境需要，收集错误日志 ['build', 'serve']
-    注：尽量不要配置serve下收集错误日志，因为收集到的日志大多没有意义，还浪费了服务器资源
+    Configure which environment to collect error logs ['build', 'serve']
+    Note: It's best not to configure error log collection under serve, as most of the collected logs are meaningless and waste server resources
    */
   errorLog: ['build'],
-    
-  // el-table中动态高度设定，计算的数值为height(100vh-delWindowHeight)，
-  // 可以根据自己公司的实际业务进行调整
+  
+  // Dynamic height setting for el-table; the calculated value is height(100vh - delWindowHeight),
+  // Adjust according to the actual business of your company
   delWindowHeight: '210px',
-
+  
   /*
    * vite.config.js base config
    * */
   viteBasePath: './',
          
    /*
-   * 初始默认语言
+   * Initial default language
    * en/zh
    * */
   defaultLanguage: 'zh',
   /*
-   * 设置默认主题色
+   * Set the default theme color
    * base-theme/lighting-theme/dark-theme
    * */
   defaultTheme: 'base-theme',
   /*
-   * 设置默认大小
+   * Set the default size
    * large / default /small
    * */
   defaultSize: 'small',
   /*
-   * 设置平台id
+   * Set the platform ID
    * such as
    * */
-  //平台id  2->vue3-admin-plus
+  // Platform ID  2->vue3-admin-plus
   plateFormId: 2
 }
   
 export default setting
 ```
 
-在页面路径[page-switch](https://github.jzfai.top/vue3-admin-plus/#/setting-switch/index)配置了测试demo
+In the page path [page-switch](https://github.jzfai.top/vue3-admin-plus/#/setting-switch/index), a test demo is configured.
 
-在页面加载之处，将settings.js配置信息加载到 pinia中
+At the beginning of the page loading, load the settings.js configuration information into Pinia.
 
-#### src/store/basic.js
+**src/store/basic.js**
 
 ```javascript
 import defaultSettings from '@/settings'
@@ -131,15 +129,13 @@ export const useBasicStore = defineStore('basic', {
 })
 ```
 
-页面上获取
+Access on the page:
 
 ```javascript
 import { useBasicStore } from '@/store/basic'
 const { settings } = useBasicStore()
 ```
 
-## 总结：
+## Conclusion:
 
-settings.js文件是一个全局的静态配置文件，也是一个统一管理配置的文件。所以如果有配置需求，尽量配置到此文件中，方便后期维护和查找
-
-
+The `settings.js` file is a global static configuration file and a file for unified management of configurations. Therefore, if there are configuration requirements, try to configure them in this file for easy maintenance and lookup later on.

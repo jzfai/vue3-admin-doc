@@ -1,18 +1,18 @@
-# 前言
+# Introduction
 
-当我们在某些特定场景中需要缓存某个页面，此时就需要用到keep-alive，本篇主要讲解架构中keep-alive的基础集成
+When we need to cache a specific page in certain scenarios, we can utilize `keep-alive`. This article mainly explains the basic integration of `keep-alive` in the architecture.
 
-[keep-alive体验地址](https://github.jzfai.top/vue3-admin-template/#/writing-demo/keep-alive)
+[Check out the keep-alive demo](https://github.jzfai.top/vue3-admin-template/#/writing-demo/keep-alive)
 
-[keep-alive官方地址](https://cn.vuejs.org/guide/built-ins/keep-alive.html#include-exclude)
+[Official documentation for keep-alive](https://cn.vuejs.org/guide/built-ins/keep-alive.html#include-exclude)
 
-#### 配置
+#### Configuration
 
-src/layout/app-main/index.vue
+In `src/layout/app-main/index.vue`:
 
 ```vue
 <template>
-  <!--右侧容器 放二级路由-->
+  <!-- Right container for secondary routes -->
   <div class="main-container">
     <router-view v-slot="{ Component }">
       <keep-alive include="['Dashboard']">
@@ -28,9 +28,9 @@ const { cachedViews } = storeToRefs(useBasicStore())
 </script>
 ```
 
->keep-alive 中我们通过 存储组件的名字 如  DashBoard
+> In `keep-alive`, we specify the component name, such as `Dashboard`.
 
-src/store/basic.js
+In `src/store/basic.js`:
 
 ```javascript
 import { defineStore } from 'pinia'
@@ -42,7 +42,7 @@ export const useBasicStore = defineStore('basic', {
     }
   },
   actions: {
-    /*keepAlive缓存*/
+    /* Keep-alive cache */
     addCachedView(view) {
       this.$patch((state) => {
         if (state.cachedViews.includes(view)) return
@@ -54,18 +54,16 @@ export const useBasicStore = defineStore('basic', {
 
 ```
 
->cachedViews ：控制二级路由缓存
+> `cachedViews`: Controls the caching of secondary routes.
 
+#### How to Use
 
-
-#### 如何使用
-
-src/views/dashboard/index.vue
+In `src/views/dashboard/index.vue`:
 
 ```vue
 <template>
   <div>dashboard</div>
-  <el-input v-model="testInput" placeholder="测试缓存" />
+  <el-input v-model="testInput" placeholder="Test Cache" />
 </template>
 <script setup name="Dashboard">
 const testInput = $ref('')
@@ -84,21 +82,19 @@ onDeactivated(() => {
 </script>
 ```
 
->第一次进入Dashboard页面触发onMounted, 此时Dashboard缓存，onActivated和onDeactivated钩子生效
+> When entering the Dashboard page for the first time, the `onMounted` hook is triggered, caching Dashboard, and the `onActivated` and `onDeactivated` hooks are effective.
 >
->第一次离开Dashboard页面触发onDeactivated钩子
+> When leaving the Dashboard page for the first time, the `onDeactivated` hook is triggered.
 >
->第二次进入Dashboard页面触发onActivated钩子，onMounted不会在触发
+> When re-entering the Dashboard page, the `onActivated` hook is triggered, and `onMounted` is not triggered again.
 
+## keep-alive Lifecycle Hooks
 
-
-## keep-alive生命周期钩子
-
-注意当组件被缓存后会触发 onActived和 onDeActived两个生命周期钩子
+Note that when a component is cached, it triggers two lifecycle hooks: `onActivated` and `onDeactivated`.
 
 ```vue
 <script setup>
-   onActived(()=>{console.log("onActived被调用")})
-   onDeActived(()=>{console.log("onDeActived被调用")})
+   onActivated(()=>{console.log("onActivated is called")})
+   onDeactivated(()=>{console.log("onDeactivated is called")})
 </script>
 ```

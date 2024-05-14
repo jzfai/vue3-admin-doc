@@ -1,16 +1,16 @@
-# 前言
+# Preface
 
-vue2我相信大家都用了很多年了，最近vue3的崛起，可能大家觉得又要为学新技术而变得头疼，本篇的话就带领大家如何快速入门vue3，及vue2如何快速转化为vue3。
+Vue 2 has been widely used for many years, but with the rise of Vue 3 recently, some may feel overwhelmed by the need to learn a new technology again. This article aims to guide you on how to quickly get started with Vue 3 and how to transition from Vue 2 to Vue 3 efficiently.
 
-[vue3官方文档](https://cn.vuejs.org/guide/introduction.html)
+[Vue 3 Official Documentation](https://v3.vuejs.org/guide/introduction.html)
 
 
 
-### 写法上区别
+### Syntax Differences
 
-vue2的选项式->vue3的组合式
+Vue 2 Options API -> Vue 3 Composition API
 
-vue2中的选项式
+Vue 2 Options API:
 
 ```javascript
 <script>
@@ -21,8 +21,8 @@ export default {
     }
   },
   mounted() {
-     //设置vue2Data数据
-     this.vue2Data=1
+     // Set vue2Data data
+     this.vue2Data = 1
   },
   methods: {
       
@@ -31,30 +31,30 @@ export default {
 </script>
 ```
 
-vue3组合式(composition Api)
+Vue 3 Composition API:
 
 ```javascript
 <script setup>
-//设置vue3Data数据
-import  {ref,onMounted} from "vue"
-let vue3Data=ref(null)
-onMounted(()=>{
-  vue3Data.value=1
+// Set vue3Data data
+import { ref, onMounted } from "vue"
+let vue3Data = ref(null)
+onMounted(() => {
+  vue3Data.value = 1
 })
-let methodDemo=()=>{
+let methodDemo = () => {
     
 }
 </script>
 ```
 
->可见vue3中的组合式写法把  定义data，设置data都放在一起了，如果后续需要迁移，直接整个块代码迁移过去就好了。不像vue2还需要从 data，mount，中单独抽取
+> In Vue 3, the Composition API combines the definition and setting of data within a single block of code. This makes it easier to migrate code because everything related to data is grouped together, unlike in Vue 2 where you need to extract data, mount it, etc.
 
 
 
-### 生命周期
+### Lifecycle Hooks
 
 ```typescript
-Vue2--------------vue3
+Vue 2 -------------- Vue 3
 beforeCreate  -> setup()
 created       -> setup()
 beforeMount   -> onBeforeMount
@@ -67,74 +67,73 @@ activated     -> onActivated
 deactivated   -> onDeactivated
 ```
 
->主要变化：
->1.beforeCreate和created  变成了 setup() 也就是在 setup 被调用时都执行了
+> Main changes:
 >
->2.其他生命周期都在前缀加了**on** , 如： mounted-> onMounted
->
->3.destroyed  -> onUnmounted
+> 1. beforeCreate and created are replaced by setup(), which is called when setup is invoked.
+> 2. Other lifecycle hooks are prefixed with "on", e.g., mounted -> onMounted.
+> 3. destroyed is changed to onUnmounted.
 
 
 
-### 响应式
+### Reactivity
 
-vue2
+Vue 2:
 
 ```javascript
 export default {
   data() {
     return {
-      //vue2中定义响应式
+      // Vue 2 reactive definition
       vue2Data: ""
     }
   },
   mounted() {
-     this.vue2Data=1
+     this.vue2Data = 1
   },
   methods: {}
 }
 ```
 
-vue3
+Vue 3:
 
 ```javascript
-//vue3中的响应式
-//reactive 一般用于定义对象
-let vue3Data1=reactive(null);
-vue3Data1={data:1}
-//ref 一般用于定义数组和基本类型
-vue3Data2.value=1
-//$ref 一般用于定义数组和基本类型
-let vue3Data3=$ref(null);
-vue3Data3=1 //现对于ref来说不用写value
+// Vue 3 reactive
+// reactive is generally used for object definition
+let vue3Data1 = reactive(null);
+vue3Data1 = { data: 1 }
+// ref is generally used for array and primitive type definition
+let vue3Data2 = ref(1);
+//$ref is generally used for array and primitive type definition
+let vue3Data3 = ref(null);
+vue3Data3.value = 1 // For ref, you don't need to write value now
 ```
 
->由原来的 vue2 data(){} 生命响应式， 变成了vue3类型的 reactive和ref，$ref
+> In Vue 3, the reactive and ref APIs are used for defining reactive data, replacing the data(){} method in Vue 2.
 >
->注：如果要使用 $ref() 定义响应式 需要在 vite.config.js
+> Note: If you want to use $ref() to define reactive data, you need to configure it in vite.config.js:
 >
->```javascript
->//vite.cinfig.js
->plugins:[
->vue({ reactivityTransform: true })
->]
->```
+> ```javascript
+> // vite.config.js
+> plugins: [
+>   vue({ reactivityTransform: true })
+> ]
+> ```
 
 
 
-#### mixins->hooks
+#### Mixins -> Hooks
 
-[为什么要移除mixns](https://cn.vuejs.org/guide/reusability/composables.html#comparisons-with-other-techniques)
+[Why remove mixins](https://v3.vuejs.org/guide/reusability/composables.html#comparisons-with-other-techniques)
 
-Vue 2 的用户可能会对 [mixins](https://cn.vuejs.org/api/options-composition.html#mixins) 选项比较熟悉。它也让我们能够把组件逻辑提取到可复用的单元里。然而 mixins 有三个主要的短板：
+Vue 2 users may be familiar with the mixins option, which allows us to extract component logic into reusable units. However, mixins have three major shortcomings:
 
-1. **不清晰的数据来源**：当使用了多个 mixin 时，实例上的数据属性来自哪个 mixin 变得不清晰，这使追溯实现和理解组件行为变得困难。这也是我们推荐在组合式函数中使用 ref + 解构模式的理由：让属性的来源在消费组件时一目了然。
-2. **命名空间冲突**：多个来自不同作者的 mixin 可能会注册相同的属性名，造成命名冲突。若使用组合式函数，你可以通过在解构变量时对变量进行重命名来避免相同的键名。
-3. **隐式的跨 mixin 交流**：多个 mixin 需要依赖共享的属性名来进行相互作用，这使得它们隐性地耦合在一起。而一个组合式函数的返回值可以作为另一个组合式函数的参数被传入，像普通函数那样。
+1. Unclear data sources: When using multiple mixins, it becomes unclear where the data properties on the instance come from, making it difficult to trace the implementation and understand the component's behavior. This is why we recommend using ref + destructuring in the Composition API: to make the source of attributes clear when consuming components.
+2. Namespace conflicts: Multiple mixins from different authors may register properties with the same name, causing naming conflicts. With the Composition API, you can avoid conflicts by renaming variables when destructuring them.
+3. Implicit cross-mixin communication: Multiple mixins need to rely on shared property names to interact with each other, leading to implicit coupling between them. With the Composition API, the return value of one composable function can be passed as a parameter to another composable function, just like ordinary functions.
 
-基于上述理由，我们不再推荐在 Vue 3 中继续使用 mixin。保留该功能只是为了项目迁移的需求和照顾熟悉它的用户。
+For these reasons, we no longer recommend using mixins in Vue 3. The feature is retained only for project migration requirements and to accommodate users familiar with it.
 
-vue2
+Vue 2:
 
 ```javascript
 export default {
@@ -158,7 +157,7 @@ export default {
 };
 ```
 
-vue3
+Vue 3:
 
 ```javascript
 import { reactive, toRefs, computed, onMounted } from "vue";
@@ -186,9 +185,9 @@ export default useCommon;
 
 
 
-#### watch 和 computed写法变更
+#### Watch and Computed Syntax Changes
 
-vue2
+Vue 2:
 
 ```javascript
 data() {
@@ -209,7 +208,7 @@ computed: {
   },
 ```
 
-vue3
+Vue 3:
 
 ```javascript
 const data = reactive({
@@ -227,25 +226,16 @@ watch(
 );
 ```
 
-#### vue2到vue3的快速转换
+#### Quick Migration from Vue 2 to Vue 3
 
-可能我们有些需要需要vue2的项目快速升级到vue3那么我们应该怎么快速升级呢？
+If you need to quickly upgrade a Vue 2 project to Vue 3, what should you do?
 
-首先 vue3相对于vue2来说有两点需要注意的：1.vue3中不在支持filter,但仍然支持vue2的写法；2. vue3不在支持ie浏览器，因此需要支持ie的不要使用vue3
+First, set up a Vue 3 framework or use a Vue 3 admin template to migrate most of the pages.
+Then, use vue2-to-composition-api to convert the remaining Vue 2 syntax to Vue 3.
+Some plugins used in Vue 2 projects may not be compatible with Vue 3. In that case, you need to update these plugins (most plugins have already been adapted to Vue 3).
 
-
-
-如何升级转换
-
-```text
-1.你可以先搭个vue3的框架或者使用vue3-admin-template,先进行大部分页面迁移
-2.剩下vue2语法可以借助 vue2-to-composition-api  进行转换 为vue3
-3.有些在vue2中使用的插件，可能在vue3中不能使用，那么这些插件，做下升级就行（现在大部分插件都已经适配了vue3）
-```
-
-[vue2-to-composition-api 使用地址](https://wd3322.github.io/to-vue3/)
+[Vue2-to-composition-api usage link](https://wd3322.github.io/to-vue3/)
 
 ![1667533019430](https://github.jzfai.top/file/vap-assets/1667533019430.png)
 
->可通过 **vue2-to-composition-api **把vue2快速转化为vue3
-
+> You can use vue2-to-composition-api to quickly convert Vue 2 code to Vue 3.

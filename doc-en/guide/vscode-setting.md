@@ -1,37 +1,32 @@
-# 前言
+# Preface
 
-人们常说磨刀不误砍柴工，本篇主要介绍用vscode配置和调试
+As the saying goes, "Sharpening your axe will not delay your job of cutting wood." This article mainly introduces how to configure and debug using VSCode.
 
+## Configuration
 
+Install plugins:
 
-## 配置
-
-安装插件
-
-```text
+```plaintext
 eslint
 Prettier - Code formatter
 TypeScript Vue Plugin (Volar)
 ```
 
-配置 Prettier为编辑器默认格式化
-
+Configure Prettier as the default formatter for the editor:
 
 ![1644830462431](https://github.jzfai.top/file/vap-assets/1644830462431.png)
 
 ![1644830464553](https://github.jzfai.top/file/vap-assets/1644830464553.png)
 
->配置完成后页面，在保存时，会自动格式化页面
+> After configuring, the page will automatically format when saving.
 
+## Debugging
 
-
-## 调试
-
-在.vscode中设置 launch.json
+Set up launch.json in .vscode:
 
 ![1651886860108](https://github.jzfai.top/file/vap-assets/1651886860108.png)
 
-```
+```json
 {
   "version": "0.2.0",
   "configurations": [
@@ -46,24 +41,24 @@ TypeScript Vue Plugin (Volar)
 }
 ```
 
->注：url  和 webRoot需要配置
+> Note: You need to configure the url and webRoot.
 
-### 运行项目
+### Run the Project
 
-先运行项目
+First, run the project:
 
 ```
 npm run dev 
 ```
 
-得到启动的地址
+Get the startup address:
+
 ![1651887278905](https://github.jzfai.top/file/vap-assets/1651887278905.png)
 
-### 设置断点调试
+### Set Breakpoints for Debugging
 
 ![1651887120164](https://github.jzfai.top/file/vap-assets/1651887120164.png)
 
-此时浏览器会自动打开
-设置相应的断点即可进行调试
+At this point, the browser will open automatically. Set breakpoints accordingly to start debugging.
 
->注：设置断点后需要重新启动浏览器
+> Note: After setting breakpoints, you need to restart the browser.

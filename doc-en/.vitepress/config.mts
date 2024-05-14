@@ -25,7 +25,7 @@ export default defineConfig({
   themeConfig: {
     logo: '/logo.svg',
     editLink: {
-      text: '为此页提供修改建议',
+      text: 'Provide suggestions for this page.',
       pattern: 'https://github.com/jzfai/vue3-admin-plus/issues'
     },
     socialLinks: [

@@ -37,7 +37,7 @@ Explanation of the configuration file .prettierrc:
 
 
 
-pretties忽略文件   .prettierignore
+Prettier ignore file: `.prettierignore`.
 
 ```javascript
 .history 
@@ -52,98 +52,100 @@ pnpm*
 .vscode
 ```
 
->pretties在格式化时会对上面目录忽略
+>Prettier will ignore the directories specified in the configuration above during formatting.
 
-此时prettier相关配置讲解完成
-
-
-
-#### idea或webstrom 如何设置 pretties 自动格式化
-
-vscode ：      可通过 快捷键 ctrl+shift+p->选择格式化文档方式->pretties
-
-webstrom：  settings->搜索preitties设置-> 勾选on save , 然后保存即可
+With that, the explanation of Prettier-related configurations is now complete.
 
 
 
-配置prettier配置文件.prettierrc 说明
+#### IntelliJ IDEA or WebStorm: How to set up automatic formatting with Prettier.
+
+VSCode: You can format documents with Prettier by using the shortcut Ctrl+Shift+P, selecting the formatting method.
+
+WebStorm: Go to settings, search for Prettier settings, check "on save", and then save to enable automatic formatting.
+
+
+
+Configuring the Prettier configuration file .prettierrc: Explanation
 
 ```json
 {
-    //使用tab缩进，默认false
+    //Using tab indentation, default is false.
     "useTabs": false,
-    // tab缩进大小,默认为2
+    // Tab indentation size, default is 2.
     "tabWidth": 2,
-    // 换行长度，默认80
+    // Line length for line breaks, default is 80.
     "printWidth": 120,
-    // 字符串使用单引号
+    // Strings use single quotes.
     "singleQuote": true,
-    // 在对象或数组最后一个元素后面是否加逗号（在ES5中加尾逗号）
+    // Whether to add a trailing comma after the last element in an object or array (adds a trailing comma in ES5).
     "trailingComma": "none",
-    // 对象中打印空格 默认true
+    // Whether to print spaces inside brackets in objects. Default is true.
     // true: { foo: bar }
     // false: {foo: bar}
     "bracketSpacing": true,
-     // 每行末尾自动添加分号;false->不添加
+    // Whether to automatically add a semicolon at the end of each line. false means not to add.
     "semi": false,
-     //解决格式化插件Prettier，格式化操作后，结束标签＞跑到下一行
+    // Resolves an issue in the Prettier formatting plugin where the closing tag ">" moves to the next line after formatting.
     "htmlWhitespaceSensitivity": "ignore"
 }
 ```
 
->vscode或webstrom设置保存时，自动格式化代码，且使用prettier方式 (不会请自行百度)
+>Automatically formatting code using Prettier upon saving in VSCode or WebStorm (please search if you're unsure).
 >
->设置后你会发现有不一样的开发体验
+>You'll notice a different development experience after configuring this.
 
-附：pretties完整配置和字段说明
+Attached: Full configuration and field explanation for Prettier.
 
 ```json
-     // 使能每一种语言默认格式化规则
-    "[html]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[css]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[less]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-   
-   /*  prettier的配置 */
-    "prettier.printWidth": 100, // 超过最大值换行
-    "prettier.tabWidth": 4, // 缩进字节数
-    "prettier.useTabs": false, // 缩进不使用tab，使用空格
-    "prettier.semi": true, // 句尾添加分号
-    "prettier.singleQuote": true, // 使用单引号代替双引号
-    "prettier.proseWrap": "preserve", // 默认值。因为使用了一些折行敏感型的渲染器（如GitHub comment）而按照markdown文本样式进行折行
-    "prettier.arrowParens": "avoid", //  (x) => {} 箭头函数参数只有一个时是否要有小括号。avoid：省略括号
-    "prettier.bracketSpacing": true, // 在对象，数组括号与文字之间加空格 "{ foo: bar }"
-    "prettier.disableLanguages": ["vue"], // 不格式化vue文件，vue文件的格式化单独设置
-    "prettier.endOfLine": "auto", // 结尾是 \n \r \n\r auto
-    "prettier.eslintIntegration": false, //不让prettier使用eslint的代码格式进行校验
-    "prettier.htmlWhitespaceSensitivity": "ignore",
-    "prettier.ignorePath": ".prettierignore", // 不使用prettier格式化的文件填写在项目的.prettierignore文件中
-    "prettier.jsxBracketSameLine": false, // 在jsx中把'>' 是否单独放一行
-    "prettier.jsxSingleQuote": false, // 在jsx中使用单引号代替双引号
-    "prettier.parser": "babylon", // 格式化的解析器，默认是babylon
-    "prettier.requireConfig": false, // Require a 'prettierconfig' to format prettier
-    "prettier.stylelintIntegration": false, //不让prettier使用stylelint的代码格式进行校验
-    "prettier.trailingComma": "es5", // 在对象或数组最后一个元素后面是否加逗号（在ES5中加尾逗号）
-    "prettier.tslintIntegration": false // 不让prettier使用tslint的代码格式进行校验
+// Enable default formatting rules for each language
+"[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+},
+"[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+},
+"[less]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+},
+"[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+},
+
+/* Prettier configuration */
+"prettier.printWidth": 100, // Wrap lines that exceed the specified line length
+"prettier.tabWidth": 4, // Number of spaces per indentation level
+"prettier.useTabs": false, // Use spaces for indentation instead of tabs
+"prettier.semi": true, // Add a semicolon at the end of each statement
+"prettier.singleQuote": true, // Use single quotes instead of double quotes
+"prettier.proseWrap": "preserve", // Default value. Maintain the original line wrapping style because of some wrap-sensitive renderers like GitHub comments, preserving markdown text style.
+"prettier.arrowParens": "avoid", // Omit parentheses when possible in arrow function parameters, e.g., (x) => {} => x => {}
+"prettier.bracketSpacing": true, // Add spaces between brackets in objects and arrays, e.g., "{ foo: bar }"
+"prettier.disableLanguages": ["vue"], // Do not format Vue files; formatting for Vue files is configured separately
+"prettier.endOfLine": "auto", // Use the line ending specified in the file, auto-detecting if unspecified
+"prettier.eslintIntegration": false, // Do not use eslint formatting rules with Prettier
+"prettier.htmlWhitespaceSensitivity": "ignore", // Ignore HTML whitespace sensitivity
+"prettier.ignorePath": ".prettierignore", // Specify a file containing patterns of files to ignore for formatting
+"prettier.jsxBracketSameLine": false, // Place the closing bracket '>' on a new line in JSX
+"prettier.jsxSingleQuote": false, // Use double quotes instead of single quotes in JSX
+"prettier.parser": "babylon", // Specify the parser for formatting; default is babylon
+"prettier.requireConfig": false, // Do not require a separate prettier config file for formatting
+"prettier.stylelintIntegration": false, // Do not use stylelint formatting rules with Prettier
+"prettier.trailingComma": "es5", // Add a trailing comma after the last element in arrays and objects (ES5-style)
+"prettier.tslintIntegration": false // Do not use tslint formatting rules with Prettier
+```
+
 ```
 
 
 
 
 
-## eslint集成讲解
+## Eslint
 
-[官方文档](https://eslint.bootcss.com/docs/user-guide/configuring)
+[Doc](https://eslint.bootcss.com/docs/user-guide/configuring)
 
-#### 相关依赖
+#### Dependencies
 
 ```json
 "devDependencies": {
@@ -163,34 +165,35 @@ webstrom：  settings->搜索preitties设置-> 勾选on save , 然后保存即�
     }
 ```
 
->注：采用的是 element-plus 的部分eslint配置
+>Note: Some ESLint configurations are based on Element Plus.
 
 
 
-#### 依赖说明
+#### Dependency Explanation
 
-eslint-plugin-import：该插件旨在支持ES2015+（ES6+）导入/导出语法的linting，并防止文件路径和导入名称拼写错误的问题。ES2015+静态模块语法打算提供的所有优点，在您的编辑器中标记出来。
+eslint-plugin-import: This plugin aims to support linting for ES2015+ (ES6+) import/export syntax and prevent issues with misspelled file paths and import names. It marks all the advantages of ES2015+ static module syntax in your editor.
 
-eslint-plugin-prettier：本质上这个工具其实就是禁用掉了一些不必要的以及和 Prettier 相冲突的 ESLint 规则
+eslint-plugin-prettier: Essentially, this tool disables unnecessary ESLint rules and those conflicting with Prettier.
 
-eslint-plugin-vue：提供的规则可以支持 .vue\js\jsx\ts\tsx 文件校验
-eslint-define-config：为.eslintrc.js文件提供defineConfig函数
+eslint-plugin-vue: Provides rules for validating .vue, .js, .jsx, .ts, and .tsx files.
 
-eslint-plugin-eslint-comments：ESLint指令注释的附加ESLint规则。
+eslint-define-config: Provides the defineConfig function for .eslintrc.js files.
 
-@typescript-eslint/eslint-plugin：一个ESLint插件，为TypeScript代码库提供lint规则。
+eslint-plugin-eslint-comments: Additional ESLint rules for ESLint directive comments.
 
-@typescript-eslint/parser：一个ESLint解析器，它利用TypeScript ESTree来允许ESLint对TypeScript源代码进行检测。
+@typescript-eslint/eslint-plugin: An ESLint plugin that provides lint rules for TypeScript codebases.
 
-eslint-plugin-jsonc：是针对JSON、JSONC和JSON5文件的ESLint插件。
+@typescript-eslint/parser: An ESLint parser that utilizes TypeScript ESTree to allow ESLint to check TypeScript source code.
 
-eslint-plugin-unicorn: 各种很棒的ESLint规则
+eslint-plugin-jsonc: ESLint plugin for JSON, JSONC, and JSON5 files.
+
+eslint-plugin-unicorn: Various excellent ESLint rules.
 
 
 
-## 配置说明
+## Configuration Explanation
 
-eslint入口配置文件 .eslintrc.json
+ESLint main configuration file: .eslintrc.json
 
 ```json
 {
@@ -199,45 +202,39 @@ eslint入口配置文件 .eslintrc.json
 }
 ```
 
->注： .eslintrc.json eslint会自动读取
+>Note: .eslintrc.json will be automatically detected by ESLint.
 
-
-
-eslint基础配置文件 eslint-config.js
+ESLint base configuration file: eslint-config.js
 
 ```json
 const { defineConfig } = require('eslint-define-config')
 module.exports = defineConfig({
-  //相关插件  
+  // Plugins
   plugins: ['@typescript-eslint', 'prettier', 'unicorn'],
-  //插件扩展  
+  // Plugin extensions
   extends: [
      /**/
   ],
   overrides: [
     rules: {
         'no-undef': 'off',
-         //定义变量未使用规则 
+         // Disable rule for defining unused variables
         '@typescript-eslint/no-unused-vars': 'off',
-         //函数为空规则 
+         // Disable rule for empty functions
         '@typescript-eslint/no-empty-function': 'off'
       }
     }
   ],
-  //设置eslint规则 
+  // ESLint rules configuration
   rules: {
      /**/
   }
 })
 ```
 
->vscode或webstrom设置保存时，自动格式化代码，且使用prettier方式
->
->设置后你会发现有不一样的开发体验
+>VSCode or WebStorm settings to automatically format code using Prettier upon saving will provide a different development experience.
 
-
-
-## eslint忽略文件.eslintignore说明
+## ESLint Ignore File (.eslintignore) Explanation
 
 ```json
 public
@@ -248,19 +245,9 @@ dist
 *.d.ts
 ```
 
-此时eslint集成完了，有可能你会遇到eslint报  **[ERR_REQUIRE_ESM]: require() of ES Module]**
-处理方法：
+Once ESLint integration is complete, you may encounter an ESLint error **[ERR_REQUIRE_ESM]: require() of ES Module]**. To resolve this, remove `"type": "module"` from package.json, delete the node_modules folder, reinstall dependencies, and consider restarting your editor.
 
-```json
-//移除package.json的 
-{
-  //"type": "module", //移除
-}
-```
-
-移除后删除node_module，重新安装依赖即可，建议重启下编辑器
-
-#### 集成lint命令到package.json中
+### Integrating lint command into package.json
 
 ```json
 {
@@ -270,25 +257,19 @@ dist
 }
 ```
 
+## Husky Integration
 
+> Git lifecycle hooks
 
-
-
-## husky 集成
-
-> git生命周期钩子
-
-
-
-### 依赖说明
+### Dependency Explanation
 
 ```json
 pnpm add husky@8.0.1 -D
 ```
 
-### 配置说明
+### Configuration Explanation
 
-在package.json的script中添加 **prepare** 命令
+Add the **prepare** command to the package.json scripts.
 
 ```shell
   "scripts": {
@@ -296,30 +277,24 @@ pnpm add husky@8.0.1 -D
   },
 ```
 
-> 运行 **npm  run  prepaer**， 当执行该命令后会在项目根目录下生成一个.husky目录
+> Running **npm run prepaer** will generate a .husky directory in the project root.
 
-
-
-.husky目录下创建文件 pre-commit
+Create a pre-commit file in the .husky directory.
 
 ```shell
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-#推送之前运行eslint检查
+# Run eslint check before pushing
 npm run lint
-##推送之前运行单元测试检查
+## Run unit test check before pushing
 #npm run test:unit
 ```
 
->pre-commit  文件会在git commit 之前执行，如果有报错会阻塞git的commit 提交，已达到校验代码的作用
+> The pre-commit file will execute before git commit. If there are any errors, it will block the commit, ensuring code validation.
 
+**You can now run git commit -m "Test Husky" and observe the console output.**
 
+## Conclusion
 
-**此时你可以运行 git commit -m "测试husk" 看下控制台输出**
-
-
-
-## 总结
-
-eslint+pretties+husky 能很大程度提升我们开发效率，和协作之间规范性。建议大家开启使用
+Using ESLint, Prettier, and Husky can greatly improve development efficiency and collaboration standardization. It's recommended for enhancing development practices.

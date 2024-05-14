@@ -1,80 +1,67 @@
-# 前言
+# Introduction
 
-进行全局错误收集，有助于我们及时收集到报错信息。特别是在生产环境中，能及时收集到用户使用时的错误日志。第一时间处理，提高系统的可靠性，和用户体验性，为公司减少不必要的损失。全局错误收集是多么重要。
+Implementing global error collection helps us to promptly gather error information. Especially in production environments, being able to collect error logs from user interactions in real-time is crucial. Handling errors promptly improves system reliability and user experience, ultimately reducing unnecessary losses for the company. Therefore, implementing global error collection is of great importance.
 
-那么本篇就来主要讲讲如何更优雅的收集错误。
+In this article, we will discuss how to elegantly collect errors.
 
-## 错误日志分为
+## Types of Error Logs
 
-JS运行时错误
+1. **JS Runtime Errors**:
+    - Normal JavaScript runtime errors like `throw new Error("JS runtime error")`.
 
->正常js运行时，Throw New Error("JS运行时错误")等的错误
+2. **Resource Loading Errors**:
+    - Errors related to loading resources like images, scripts, or stylesheets (`img`, `script`, `link`).
 
-资源加载错误
+3. **Unhandled Promise Rejections**:
+    - Errors occurring from unhandled promise rejections after calling `reject` on a promise without a `catch` handler.
 
->img，script， link  中加载资源错误
+4. **`console.error` Errors**:
+    - Errors logged using `console.error`.
 
-promise被reject未被处理产生错误:
+5. **Request Errors (Cross-Origin, 401, 404, 500)**:
+    - Errors generated from AJAX requests or `fetch`, such as cross-origin errors, 401 unauthorized, 404 not found, etc.
 
->new Promise  reject后，未catch产生的错误
+Now, let's see how to collect these errors in detail.
 
-console.error错误:
+## Error Log Experience
 
->console.error(错误)生成的错误
+[Try it out](https://github.jzfai.top/vue3-admin-plus/#/error-log/error-log)
 
-请求错误(跨域错误，401，404，500)
+## Framework Integration Principle
 
->发送ajax请求，或者fatch的错误收集，如跨域，401,404等错误
+#### Installation
 
-那么如何收集呢，请看下面详细介绍
-
-
-
-## 错误日志体验
-
-[体验一下](https://github.jzfai.top/vue3-admin-plus/#/error-log/error-log)
-
-
-
-## 框架集成原理
-
-#### 安装
-
-收集错误日志依赖
+Install the error log collection dependency:
 
 ```json
 "js-error-collection": "^1.0.7"
 ```
 
-#### 配置
+#### Configuration
 
-src/hooks/use-error-log.js
+**src/hooks/use-error-log.js**:
 
 ```javascript
-//发送请求
 const errorLogReq = (errLog) => {
   axiosReq({
-    url: import.meta.env.VITE_APP_BASE_URL+reqUrl,
+    url: import.meta.env.VITE_APP_BASE_URL + reqUrl,
     data: {
-      pageUrl:   window.location.href,
+      pageUrl: window.location.href,
       errorLog: errLog,
       browserType: navigator.userAgent,
       version: pack.version
     },
     method: 'post'
   }).then(() => {
-    //通知错误列表页面更新数据
     bus.emit('reloadErrorPage', {})
   })
 }
-//收集错误日志
+
 export const useErrorLog = () => {
-  //判断该环境是否需要收集错误日志,由settings配置决定
   if (settings.errorLog?.includes(import.meta.env.VITE_APP_ENV)) {
     jsErrorCollection({ runtimeError: true, rejectError: true, consoleError: true }, (errLog) => {
       if (!repeatErrorLogJudge || !errLog.includes(repeatErrorLogJudge)) {
         errorLogReq(errLog)
-        //移除重复日志，fix重复提交错误日志，避免造成死循环
         repeatErrorLogJudge = errLog.slice(0, 20)
       }
     })
@@ -82,34 +69,22 @@ export const useErrorLog = () => {
 }
 ```
 
-### 集成
+### Integration
 
-src/App.vue
+**src/App.vue**:
 
 ```typescript
 onMounted(() => {
-  //lanch the errorLog collection
   useErrorLog()
 })
 ```
 
+## How to Enable Error Log Collection
 
-
-## 如何开启错误日志收集
-
-在settings.js文件中 我们可以通过字段 errorLog 设置错误日志收集的环境
-
-
-src/settings.js
+In the **src/settings.js** file, you can configure the environments where error logs should be collected:
 
 ```typescript
-  /**
-   * @type {string | array} 'dev' | ['prod','test','dev'] according to the .env file props of VITE_APP_ENV
-   * @description Need show err logs component.
-   * The default is only used in the production env
-   * If you want to also use it in dev, you can pass ['dev', 'test']
-   */
-  errorLog: ['prod']
+errorLog: ['prod']
 ```
 
->注：默认只有在生产环境是开启，如果不想去收集 全局错误日志  请设置    errorLog: []
+By default, error log collection is enabled only in the production environment. If you want to disable error log collection entirely, set `errorLog: []`.

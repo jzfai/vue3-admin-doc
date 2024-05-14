@@ -1,15 +1,15 @@
-# 前言
+# Preface
 
-这里介绍下 ref 和 reactive 函数的使用区别和响应式原理，以及在实际项目中如何使用和一些常见问题
+Here, let's introduce the differences between the `ref` and `reactive` functions, their usage, reactive principles, and how to use them in actual projects along with common issues.
 
-## ref 函数
+## `ref` Function
 
-语法：const xxx = ref (initValue)
-接受的数据类型：基本类型，引用类型
-作用：把参数加工成一个响应式对象，全称为 reference 对象(我们下面一律简称为 ref 对象)
-核心原理：如果使用的是基本类型响应式依赖 Object.defineProperty( )，如果 ref 使用的是引用类型，底层 ref 会借助 reactive 的 proxy 定义响应式
+Syntax: `const xxx = ref(initValue)`
+Accepted data types: Primitive types, reference types
+Purpose: Turns the parameter into a reactive object, referred to as a reference object (hereafter simply referred to as a ref object)
+Core principle: If a primitive type is used, reactivity relies on `Object.defineProperty()`. If a reference type is used with `ref`, it internally leverages the `proxy` of `reactive`.
 
-基本使用：
+Basic Usage:
 
 ```javascript
 <template>
@@ -20,10 +20,10 @@
 <script setup>
 import { ref } from 'vue'
 let refBaseType = ref(null)
-//ref 需要用.value去获取值
+// Use .value to access the value of ref
 refBaseType.value = 'i am ref'
 console.log('refBaseType', refBaseType)
-//打印结果
+// Output
 /*
 RefImpl {_shallow: false, dep: undefined, __v_isRef: true, _rawValue: "i am ref", _value: "i am ref"}
 dep: undefined
@@ -34,11 +34,11 @@ _value: "i am ref"
 value: "i am ref"
 __proto__: Object
 * */
-//如果ref使用的是对象，底层ref会借助reactive的proxy ******
+// If ref uses an object, it internally uses a reactive proxy ******
 let refReferenceType = ref({})
 refReferenceType.value = { count: 1 }
 console.log('refReferenceType', refReferenceType)
-//打印结果
+// Output
 /*
 RefImpl {_shallow: false, dep: undefined, __v_isRef: true, _rawValue: {…}, _value: Proxy}
 dep: Set(1) {ReactiveEffect}
@@ -46,7 +46,7 @@ __v_isRef: true
 _rawValue: {count: 1}
 _shallow: false
 _value: Proxy {count: 1}
-value: Proxy  //如果ref使用的是对象，底层ref会借助reactive的proxy
+value: Proxy  // If ref uses an object, it internally uses a reactive proxy
 [[Handler]]: Object
 [[Target]]: Object
 [[IsRevoked]]: false
@@ -60,16 +60,16 @@ value: Proxy  //如果ref使用的是对象，底层ref会借助reactive的proxy
 
 ```
 
-> 如果 ref 使用的是对象，ref 会借助 reactive 生成 proxy
+> If `ref` is used with an object, it leverages `reactive` to generate a `proxy`.
 
-## reactive 函数
+## `reactive` Function
 
-语法：const xxx = ref (源对象)
-接受的数据类型：引用类型
-作用：把参数加工成一个代理对象，全称为 proxy 对象
-核心原理：基于 Es6 的 Proxy 实现，通过 Reflect 反射代理操作源对象，相比于 reactive 定义的浅层次响应式数据对象，reactive 定义的是更深层次的响应式数据对象
+Syntax: `const xxx = reactive (sourceObject)`
+Accepted data types: Reference types
+Purpose: Turns the parameter into a proxied object, referred to as a proxy object
+Core principle: It's based on ES6's Proxy implementation. It uses Reflect to reflectively proxy operations on the source object. Unlike shallow reactive data objects defined with `reactive`, `reactive` defines deeper reactive data objects.
 
-基本使用：
+Basic Usage:
 
 ```javascript
 <template>
@@ -82,30 +82,30 @@ value: Proxy  //如果ref使用的是对象，底层ref会借助reactive的proxy
 <script setup>
 import { reactive } from 'vue'
 let reactiveBaseType = reactive(null)
-//reactive 无法定义基本类型的proxy,且设置值无法响应数据
+// Reactive cannot define a proxy for primitive types, and setting values does not respond to data
 let setData = () => {
   reactiveBaseType = 'fai'
 }
 console.log('reactiveBaseType', reactiveBaseType)
-//打印结果
+// Output
 /*
 null
 * */
-//如果reactive使用的是引用类型
+// If reactive uses a reference type
 let reactiveReferenceType = reactive({ count: 1 })
 let setReactive = () => {
-  //这样设置会去proxy
+  // This way of setting will remove the proxy
   reactiveReferenceType = { count: 1 }
   console.log(reactiveReferenceType)
-  //打印结果
+  // Output
   /*
-   *{count: 1} //proxy 没了，所以reactive申明的无法直接替换整个对象，如果有这个需求请使用ref
+   *{count: 1} // proxy is gone, so reactive-defined objects cannot be directly replaced with the entire object. Use ref if you have this requirement
    * */
 }
 console.log('reactiveReferenceType', reactiveReferenceType)
-//打印结果
+// Output
 /*
-//proxy响应式
+// Proxy reactive
 Proxy {count: 1}
 [[Handler]]: Object
 [[Target]]: Object
@@ -121,23 +121,19 @@ __proto__: Object
 
 ```
 
-> 注：reactive 申明的无法直接替换整个对象，如果有这个需求请使用 ref
+> Note: Reactive-defined objects cannot be directly replaced with the entire object. If you have this requirement, use `ref`.
 
+## Summary
 
+Both `ref` and `reactive` can achieve reactivity.
 
-## 总结
+`ref`: Generally used for defining primitive types and reference types. If an object is used, `ref` internally leverages `reactive` to create a proxy object, which allows direct replacement of the entire object. For example, when data for a table is requested from the backend and needs to be assigned to a reactive object, if `reactive` is used, it cannot respond to this requirement.
 
-ref 和 reactive 都可以做响应式
+`reactive`: Generally used for reference types such as `{}`. It cannot directly modify the entire object at once. For example, when data for a table is requested from the backend and you want to assign the entire array at once, it cannot be achieved. In this case, it is recommended to use `ref` to define arrays.
 
-ref:一般用在定义基本类型和引用类型，如果是引用类型底层会借助 reactive 形成 proxy 代理对象,可以直接复制整个对象，如 table 的数据请求回来，需要将数据整体赋值个响应对象这时如果使用的是 reactive 就无法进行响应。
+## Recommendations for Using `ref` and `reactive`
 
-reactive：一般用在引用类型，如{}等,不能一次性修改整个对象，如我们后端请求 table 的数据数据，如果想一次性赋值的整个数组的话，就行不通，此时建议使用 ref 来定义数组。
-
-
-
-## ref 和 reactive 使用建议
-
-**第一种写法：除了对象都用 ref 来定义**
+**First approach: Use `ref` to define everything except objects**
 
 ```javascript
 let switchKG = ref(false)
@@ -153,7 +149,7 @@ let Obj = reactive({
 reactive.arr = [1, 2, 3, 4, 5]
 ```
 
-**第二种写法：都用 reactive 来定义，然后用 toRefs 进行导出到页面使用**
+**Second approach: Use `reactive` to define everything, then export them to the page using `toRefs`**
 
 ```javascript
 <template>
@@ -171,9 +167,9 @@ let state = reactive({
 })
 console.log(state.arr)
 console.log(state.obj)
-//导出到页面使用
+// Export to page for use
 const {swithKW, arr, obj } = toRefs(state)
 </script>
 ```
 
-当然你也可以全部使用 **ref** 来定义变量  ，目前来说还有一种更简便的写法  **$ref** 相对于 ref来说写法上更加简单
+Of course, you can also use `ref` to define all variables. Currently, there is a simpler way to do this with `$ref`, which is simpler to write compared to `ref`.
