@@ -27,7 +27,8 @@ cd vue3-admin-doc
 pnpm i
 
 # develop
-pnpm run dev
+pnpm run dev:en #en
+pnpm run dev:zh #zh
 ```
 
 
